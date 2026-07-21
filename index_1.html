@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FilingBell — Know When a Company Files Something Big</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14213D;
+    --ink-soft: #1E2E52;
+    --paper: #ECE7D8;
+    --paper-dim: #DCD6C3;
+    --red: #B23A2E;
+    --green: #4C7A5E;
+    --line: #5B6B7A;
+    --display: 'Zilla Slab', serif;
+    --body: 'Source Serif 4', serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--body);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav.wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+  .logo {
+    font-family: var(--mono);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .logo b { color: var(--red); }
+  .nav-links { font-family: var(--mono); font-size: 13px; color: var(--paper-dim); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 40px 0 90px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    margin: 0 0 26px;
+    max-width: 11ch;
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    color: var(--paper-dim);
+    max-width: 46ch;
+    margin: 0 0 40px;
+  }
+
+  .hero-sub em { color: var(--paper); font-style: normal; border-bottom: 1px solid var(--red); }
+
+  /* Stamp element -- the signature piece */
+  .stamp {
+    position: absolute;
+    top: 30px;
+    right: 24px;
+    width: 138px;
+    height: 138px;
+    border: 3px solid var(--red);
+    border-radius: 50%;
+    color: var(--red);
+    font-family: var(--mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: rotate(9deg);
+    opacity: 0.9;
+    animation: stampIn 0.5s cubic-bezier(.2,1.4,.4,1) 0.15s both;
+  }
+  .stamp-inner {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+  .stamp-inner .big { font-size: 20px; font-weight: 700; display: block; letter-spacing: 0.08em; }
+
+  @keyframes stampIn {
+    from { transform: rotate(9deg) scale(2.4); opacity: 0; }
+    to   { transform: rotate(9deg) scale(1); opacity: 0.9; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stamp { animation: none; }
+  }
+  @media (max-width: 640px) {
+    .stamp { position: static; margin-bottom: 28px; transform: rotate(-3deg); }
+  }
+
+  /* ---------- SIGNUP FORM ---------- */
+  form.signup {
+    display: flex;
+    gap: 10px;
+    max-width: 460px;
+    flex-wrap: wrap;
+  }
+  input[type="email"] {
+    flex: 1 1 240px;
+    background: var(--ink-soft);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 14px 16px;
+    border-radius: 3px;
+  }
+  input[type="email"]::placeholder { color: var(--paper-dim); }
+  input[type="email"]:focus, button:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+  }
+  button.cta {
+    background: var(--red);
+    color: var(--paper);
+    border: none;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    padding: 14px 22px;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  button.cta:hover { background: #9c2f25; }
+  .form-note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--paper-dim);
+    margin-top: 12px;
+  }
+
+  /* ---------- SECTION SCAFFOLDING ---------- */
+  section { padding: 64px 0; border-top: 1px solid rgba(236,231,216,0.15); }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 18px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 600;
+    margin: 0 0 20px;
+    max-width: 22ch;
+  }
+  .lead { color: var(--paper-dim); max-width: 56ch; font-size: 17px; margin-bottom: 40px; }
+
+  /* ---------- SAMPLE DIGEST TABLE ---------- */
+  .digest-frame {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--line);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--paper-dim);
+  }
+  tbody td { padding: 14px 16px; border-bottom: 1px solid var(--paper-dim); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  .company { font-weight: 600; font-family: var(--body); }
+  .ticker { font-family: var(--mono); font-size: 12px; color: var(--line); }
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 10px;
+    color: white;
+    white-space: nowrap;
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps { display: grid; gap: 28px; }
+  .step { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--paper);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+  }
+  .step h3 { font-family: var(--display); font-size: 18px; margin: 8px 0 6px; font-weight: 600; }
+  .step p { color: var(--paper-dim); margin: 0; font-size: 15px; max-width: 52ch; }
+
+  /* ---------- WHO IT'S FOR ---------- */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: rgba(236,231,216,0.15);
+    border: 1px solid rgba(236,231,216,0.15);
+  }
+  .audience-card { background: var(--ink); padding: 24px; }
+  .audience-card .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .audience-card p { margin: 0; font-size: 14.5px; color: var(--paper-dim); }
+
+  /* ---------- TRACK RECORD ---------- */
+  .track-record-box {
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    padding: 32px;
+    text-align: center;
+  }
+  .track-record-box .big-label {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--paper-dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 50px 0 60px; }
+  .disclaimer {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--paper-dim);
+    max-width: 60ch;
+    border-left: 2px solid var(--line);
+    padding-left: 16px;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <div class="logo">Filing<b>Bell</b></div>
+  <div class="nav-links">SEC EDGAR &middot; 8-K Filings &middot; Daily</div>
+</nav>
+
+<header class="hero wrap">
+  <div class="stamp">
+    <div class="stamp-inner">NEW<span class="big">8-K</span>TODAY</div>
+  </div>
+  <div class="eyebrow">Now watching EDGAR in real time</div>
+  <h1>Know the moment a company puts itself in play.</h1>
+  <p class="hero-sub">Every day, public companies quietly tell the SEC they're <em>exploring a sale, forming a special committee, or filing for bankruptcy</em> &mdash; buried in 8-Ks nobody reads until it's news. FilingBell reads all of them, the day they're filed.</p>
+
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="email" style="position:absolute; left:-9999px;">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell signup">
+    <input type="email" id="email" name="email" placeholder="you@email.com" required>
+    <button class="cta" type="submit">Get the daily digest</button>
+  </form>
+  <div class="form-note">Free while in early access. One email a day. Unsubscribe anytime.</div>
+</header>
+
+<section class="wrap">
+  <div class="section-label">Sample &mdash; Tuesday's Digest</div>
+  <h2>This is what lands in your inbox.</h2>
+  <p class="lead">Real filings, ranked by how confirmed the event actually is &mdash; a signed merger agreement first, a board "exploring options" further down.</p>
+
+  <div class="digest-frame">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Signal</th><th>Filed</th><th>Mkt Cap</th><th>P/B</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="company">Lulu's Fashion Lounge</div><div class="ticker">LVLU</div></td>
+          <td><span class="badge" style="background:#9a6700">Formal Process</span></td>
+          <td>Jul 13</td><td>$45.0M</td><td>0.62</td>
+        </tr>
+        <tr>
+          <td><div class="company">Aterian, Inc.</div><div class="ticker">ATER</div></td>
+          <td><span class="badge" style="background:#9a6700">Formal Process</span></td>
+          <td>Mar 23</td><td>$18.0M</td><td>0.34</td>
+        </tr>
+        <tr>
+          <td><div class="company">Domo, Inc.</div><div class="ticker">DOMO</div></td>
+          <td><span class="badge" style="background:#57606a">Early Signal</span></td>
+          <td>Feb 19</td><td>$210.0M</td><td>3.10</td>
+        </tr>
+        <tr>
+          <td><div class="company">LKQ Corp</div><div class="ticker">LKQ</div></td>
+          <td><span class="badge" style="background:#57606a">Early Signal</span></td>
+          <td>Jan 26</td><td>$8.9B</td><td>1.40</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">How it works</div>
+  <h2>Three steps, none of them yours.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div><h3>We read every 8-K, daily</h3><p>Every new filing on EDGAR is scanned for the exact language companies use when something structural is happening &mdash; strategic reviews, special committees, mergers, bankruptcies.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div><h3>We rank by certainty</h3><p>A signed merger agreement isn't the same as a board "considering its options." We sort by how confirmed the event actually is, not just how recent.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div><h3>It lands in your inbox</h3><p>One email each morning. Every entry links straight to the primary filing on EDGAR &mdash; we point, you decide.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Who reads it</div>
+  <h2>Built for people who act on primary sources.</h2>
+  <div class="audience-grid">
+    <div class="audience-card"><span class="tag">Value &amp; distressed</span><p>Looking for companies trading below tangible book, before a sale process re-rates the stock.</p></div>
+    <div class="audience-card"><span class="tag">Merger arbitrage</span><p>Tracking the spread between today's price and an announced deal price.</p></div>
+    <div class="audience-card"><span class="tag">Credit &amp; distressed debt</span><p>Bankruptcy and restructuring filings matter to bondholders as much as shareholders.</p></div>
+    <div class="audience-card"><span class="tag">Corp dev &amp; deal sourcing</span><p>Same-day awareness of which public companies are formally exploring a sale.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Track record</div>
+  <h2>Backtested against real filing history.</h2>
+  <div class="track-record-box">
+    <div class="big-label">Historical performance dataset in progress</div>
+    <p style="color:var(--paper-dim); margin: 14px 0 0;">We're backtesting years of past filings against real outcomes &mdash; acquired, restructured, or still trading &mdash; so you see real numbers here soon, not projections.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <h2 style="max-width:20ch;">Get tomorrow's filings in your inbox.</h2>
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="email2" style="position:absolute; left:-9999px;">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell signup">
+    <input type="email" id="email2" name="email" placeholder="you@email.com" required>
+    <button class="cta" type="submit">Get the daily digest</button>
+  </form>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision.</div>
+</footer>
+
+</body>
+</html>
