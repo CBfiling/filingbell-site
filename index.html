@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FilingBell — Know When a Company Files Something Big</title>
+<meta name="description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Backtested against ~3,000 historical filings.">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<meta property="og:title" content="FilingBell — Know When a Company Files Something Big">
+<meta property="og:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against ~3,000 historical filings — see real completion rates by signal type.">
+<meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbfiling.github.io/filingbell-site/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FilingBell — Know When a Company Files Something Big">
+<meta name="twitter:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against ~3,000 historical filings.">
+<meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -38,7 +51,6 @@
     padding: 0 24px;
   }
 
-  /* ---------- NAV ---------- */
   nav.wrap {
     display: flex;
     justify-content: space-between;
@@ -55,7 +67,6 @@
   .logo b { color: var(--red); }
   .nav-links { font-family: var(--mono); font-size: 13px; color: var(--paper-dim); }
 
-  /* ---------- HERO ---------- */
   header.hero {
     padding: 40px 0 90px;
     position: relative;
@@ -100,7 +111,6 @@
 
   .hero-sub em { color: var(--paper); font-style: normal; border-bottom: 1px solid var(--red); }
 
-  /* Stamp element -- the signature piece */
   .stamp {
     position: absolute;
     top: 30px;
@@ -137,7 +147,6 @@
     .stamp { position: static; margin-bottom: 28px; transform: rotate(-3deg); }
   }
 
-  /* ---------- SIGNUP FORM ---------- */
   form.signup {
     display: flex;
     gap: 10px;
@@ -180,7 +189,6 @@
     margin-top: 12px;
   }
 
-  /* ---------- SECTION SCAFFOLDING ---------- */
   section { padding: 64px 0; border-top: 1px solid rgba(236,231,216,0.15); }
   .section-label {
     font-family: var(--mono);
@@ -199,7 +207,6 @@
   }
   .lead { color: var(--paper-dim); max-width: 56ch; font-size: 17px; margin-bottom: 40px; }
 
-  /* ---------- SAMPLE DIGEST TABLE ---------- */
   .digest-frame {
     background: var(--paper);
     color: var(--ink);
@@ -233,7 +240,47 @@
     white-space: nowrap;
   }
 
-  /* ---------- HOW IT WORKS ---------- */
+  @media (max-width: 640px) {
+    .digest-frame table,
+    .digest-frame thead,
+    .digest-frame tbody,
+    .digest-frame th,
+    .digest-frame td,
+    .digest-frame tr {
+      display: block;
+    }
+    .digest-frame thead { display: none; }
+    .digest-frame tr {
+      border-bottom: 2px solid var(--paper-dim);
+      padding: 12px 0;
+    }
+    .digest-frame tbody tr:last-child { border-bottom: none; }
+    .digest-frame td {
+      border-bottom: none;
+      padding: 4px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .digest-frame td[data-label]::before {
+      content: attr(data-label);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--line);
+      flex-shrink: 0;
+    }
+    .digest-frame td[data-label="Company"] {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding-top: 8px;
+    }
+    .digest-frame td[data-label="Company"]::before { display: none; }
+  }
+
   .steps { display: grid; gap: 28px; }
   .step { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; }
   .step-num {
@@ -249,7 +296,6 @@
   .step h3 { font-family: var(--display); font-size: 18px; margin: 8px 0 6px; font-weight: 600; }
   .step p { color: var(--paper-dim); margin: 0; font-size: 15px; max-width: 52ch; }
 
-  /* ---------- WHO IT'S FOR ---------- */
   .audience-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -269,7 +315,6 @@
   }
   .audience-card p { margin: 0; font-size: 14.5px; color: var(--paper-dim); }
 
-  /* ---------- TRACK RECORD ---------- */
   .track-record-box {
     border: 1px dashed var(--line);
     border-radius: 6px;
@@ -284,7 +329,6 @@
     text-transform: uppercase;
   }
 
-  /* ---------- FOOTER ---------- */
   footer { padding: 50px 0 60px; }
   .disclaimer {
     font-family: var(--mono);
@@ -333,24 +377,24 @@
       </thead>
       <tbody>
         <tr>
-          <td><div class="company">Lulu's Fashion Lounge</div><div class="ticker">LVLU</div></td>
-          <td><span class="badge" style="background:#9a6700">Formal Process</span></td>
-          <td>Jul 13</td><td>$45.0M</td><td>0.62</td>
+          <td data-label="Company"><div class="company">Lulu's Fashion Lounge</div><div class="ticker">LVLU</div></td>
+          <td data-label="Signal"><span class="badge" style="background:#9a6700">Special Committee Formed</span></td>
+          <td data-label="Filed">Jul 13</td><td data-label="Mkt Cap">$45.0M</td><td data-label="P/B">0.62</td>
         </tr>
         <tr>
-          <td><div class="company">Aterian, Inc.</div><div class="ticker">ATER</div></td>
-          <td><span class="badge" style="background:#9a6700">Formal Process</span></td>
-          <td>Mar 23</td><td>$18.0M</td><td>0.34</td>
+          <td data-label="Company"><div class="company">Aterian, Inc.</div><div class="ticker">ATER</div></td>
+          <td data-label="Signal"><span class="badge" style="background:#9a6700">Strategic Alternatives Process</span></td>
+          <td data-label="Filed">Mar 23</td><td data-label="Mkt Cap">$18.0M</td><td data-label="P/B">0.34</td>
         </tr>
         <tr>
-          <td><div class="company">Domo, Inc.</div><div class="ticker">DOMO</div></td>
-          <td><span class="badge" style="background:#57606a">Early Signal</span></td>
-          <td>Feb 19</td><td>$210.0M</td><td>3.10</td>
+          <td data-label="Company"><div class="company">Domo, Inc.</div><div class="ticker">DOMO</div></td>
+          <td data-label="Signal"><span class="badge" style="background:#57606a">Exploring Strategic Alternatives</span></td>
+          <td data-label="Filed">Feb 19</td><td data-label="Mkt Cap">$210.0M</td><td data-label="P/B">3.10</td>
         </tr>
         <tr>
-          <td><div class="company">LKQ Corp</div><div class="ticker">LKQ</div></td>
-          <td><span class="badge" style="background:#57606a">Early Signal</span></td>
-          <td>Jan 26</td><td>$8.9B</td><td>1.40</td>
+          <td data-label="Company"><div class="company">LKQ Corp</div><div class="ticker">LKQ</div></td>
+          <td data-label="Signal"><span class="badge" style="background:#57606a">Reviewing Strategic Alternatives</span></td>
+          <td data-label="Filed">Jan 26</td><td data-label="Mkt Cap">$8.9B</td><td data-label="P/B">1.40</td>
         </tr>
       </tbody>
     </table>
@@ -395,6 +439,20 @@
     <p style="color:var(--paper-dim); margin: 14px 0 24px;">See exactly how many flagged filings led to a completed acquisition, how many ended in bankruptcy, and how prices moved &mdash; broken down by signal type.</p>
     <a href="track_record.html" class="cta" style="display:inline-block; text-decoration:none;">View the full track record &rarr;</a>
   </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Why I built this</div>
+  <h2>One person's research tool, not a company.</h2>
+  <p class="lead">
+    I spend a lot of time digging through SEC filings by hand &mdash; looking for the kind of mispriced, overlooked situations that don't show up on a normal stock screener. A board quietly hiring a bank to "explore alternatives," a special committee getting formed, a company trading at a steep discount to book value right as something changes.
+  </p>
+  <p class="lead">
+    The problem is that information is buried in individual 8-K filings, not a searchable database, and by the time it shows up in a headline or a stock screener, the opportunity's often already gone. I got tired of manually checking EDGAR every day, so I built a scraper that does it for me &mdash; then I backtested it against thousands of past filings to see if the signal was actually real before trusting it myself.
+  </p>
+  <p class="lead" style="margin-bottom:0;">
+    This is a solo project, still early. I use it myself every morning, and I'm sharing it because I figured other people doing similar research might find it useful too.
+  </p>
 </section>
 
 <footer class="wrap">
