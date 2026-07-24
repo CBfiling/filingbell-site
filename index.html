@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FilingBell — Know When a Company Files Something Big</title>
-<meta name="description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Backtested against ~3,000 historical filings.">
+<meta name="description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Backtested against thousands of historical filings.">
 <link rel="icon" type="image/png" href="favicon.png">
 
 <meta property="og:title" content="FilingBell — Know When a Company Files Something Big">
-<meta property="og:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against ~3,000 historical filings — see real completion rates by signal type.">
+<meta property="og:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against thousands of historical filings — see real completion rates by signal type.">
 <meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbfiling.github.io/filingbell-site/">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FilingBell — Know When a Company Files Something Big">
-<meta name="twitter:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against ~3,000 historical filings.">
+<meta name="twitter:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against thousands of historical filings.">
 <meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -51,6 +51,7 @@
     padding: 0 24px;
   }
 
+  /* ---------- NAV ---------- */
   nav.wrap {
     display: flex;
     justify-content: space-between;
@@ -67,6 +68,7 @@
   .logo b { color: var(--red); }
   .nav-links { font-family: var(--mono); font-size: 13px; color: var(--paper-dim); }
 
+  /* ---------- HERO ---------- */
   header.hero {
     padding: 40px 0 90px;
     position: relative;
@@ -111,6 +113,32 @@
 
   .hero-sub em { color: var(--paper); font-style: normal; border-bottom: 1px solid var(--red); }
 
+  .stat-strip {
+    display: flex;
+    gap: 24px;
+    margin: 0 0 36px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1 1 200px;
+    border-left: 2px solid var(--red);
+    padding-left: 16px;
+  }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--paper-dim);
+    margin-top: 6px;
+    max-width: 34ch;
+  }
+
+  /* Stamp element -- the signature piece */
   .stamp {
     position: absolute;
     top: 30px;
@@ -147,6 +175,7 @@
     .stamp { position: static; margin-bottom: 28px; transform: rotate(-3deg); }
   }
 
+  /* ---------- SIGNUP FORM ---------- */
   form.signup {
     display: flex;
     gap: 10px;
@@ -189,6 +218,7 @@
     margin-top: 12px;
   }
 
+  /* ---------- SECTION SCAFFOLDING ---------- */
   section { padding: 64px 0; border-top: 1px solid rgba(236,231,216,0.15); }
   .section-label {
     font-family: var(--mono);
@@ -207,6 +237,7 @@
   }
   .lead { color: var(--paper-dim); max-width: 56ch; font-size: 17px; margin-bottom: 40px; }
 
+  /* ---------- SAMPLE DIGEST TABLE ---------- */
   .digest-frame {
     background: var(--paper);
     color: var(--ink);
@@ -240,6 +271,9 @@
     white-space: nowrap;
   }
 
+  /* ---------- MOBILE-ONLY: stack the digest table as cards instead of
+     a wide table, since the longer signal labels no longer fit in a row
+     on narrow screens. Desktop table styles above are untouched. ---------- */
   @media (max-width: 640px) {
     .digest-frame table,
     .digest-frame thead,
@@ -281,6 +315,7 @@
     .digest-frame td[data-label="Company"]::before { display: none; }
   }
 
+  /* ---------- HOW IT WORKS ---------- */
   .steps { display: grid; gap: 28px; }
   .step { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; }
   .step-num {
@@ -296,6 +331,7 @@
   .step h3 { font-family: var(--display); font-size: 18px; margin: 8px 0 6px; font-weight: 600; }
   .step p { color: var(--paper-dim); margin: 0; font-size: 15px; max-width: 52ch; }
 
+  /* ---------- WHO IT'S FOR ---------- */
   .audience-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -315,12 +351,23 @@
   }
   .audience-card p { margin: 0; font-size: 14.5px; color: var(--paper-dim); }
 
+  /* ---------- TRACK RECORD ---------- */
   .track-record-box {
     border: 1px dashed var(--line);
     border-radius: 6px;
     padding: 32px;
     text-align: center;
   }
+  .faq { display: grid; gap: 24px; }
+  .faq-item { max-width: 62ch; }
+  .faq-q {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 6px;
+  }
+  .faq-a { color: var(--paper-dim); font-size: 15px; }
   .track-record-box .big-label {
     font-family: var(--mono);
     font-size: 13px;
@@ -329,6 +376,7 @@
     text-transform: uppercase;
   }
 
+  /* ---------- FOOTER ---------- */
   footer { padding: 50px 0 60px; }
   .disclaimer {
     font-family: var(--mono);
@@ -352,119 +400,6 @@
   <div class="stamp">
     <div class="stamp-inner">NEW<span class="big">8-K</span>TODAY</div>
   </div>
-  <div class="eyebrow">Now watching EDGAR in real time</div>
+  <div class="eyebrow">Scanning EDGAR every day</div>
   <h1>Know the moment a company puts itself in play.</h1>
-  <p class="hero-sub">Every day, public companies quietly tell the SEC they're <em>exploring a sale, forming a special committee, or filing for bankruptcy</em> &mdash; buried in 8-Ks nobody reads until it's news. FilingBell reads all of them, the day they're filed.</p>
-
-  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
-    <label for="email" style="position:absolute; left:-9999px;">Email address</label>
-    <input type="hidden" name="_subject" value="New FilingBell signup">
-    <input type="email" id="email" name="email" placeholder="you@email.com" required>
-    <button class="cta" type="submit">Get the daily digest</button>
-  </form>
-  <div class="form-note">Free while in early access. One email a day. Unsubscribe anytime.</div>
-</header>
-
-<section class="wrap">
-  <div class="section-label">Sample &mdash; Tuesday's Digest</div>
-  <h2>This is what lands in your inbox.</h2>
-  <p class="lead">Real filings, ranked by how confirmed the event actually is &mdash; a signed merger agreement first, a board "exploring options" further down.</p>
-
-  <div class="digest-frame">
-    <table>
-      <thead>
-        <tr><th>Company</th><th>Signal</th><th>Filed</th><th>Mkt Cap</th><th>P/B</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-label="Company"><div class="company">Lulu's Fashion Lounge</div><div class="ticker">LVLU</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#9a6700">Special Committee Formed</span></td>
-          <td data-label="Filed">Jul 13</td><td data-label="Mkt Cap">$45.0M</td><td data-label="P/B">0.62</td>
-        </tr>
-        <tr>
-          <td data-label="Company"><div class="company">Aterian, Inc.</div><div class="ticker">ATER</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#9a6700">Strategic Alternatives Process</span></td>
-          <td data-label="Filed">Mar 23</td><td data-label="Mkt Cap">$18.0M</td><td data-label="P/B">0.34</td>
-        </tr>
-        <tr>
-          <td data-label="Company"><div class="company">Domo, Inc.</div><div class="ticker">DOMO</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#57606a">Exploring Strategic Alternatives</span></td>
-          <td data-label="Filed">Feb 19</td><td data-label="Mkt Cap">$210.0M</td><td data-label="P/B">3.10</td>
-        </tr>
-        <tr>
-          <td data-label="Company"><div class="company">LKQ Corp</div><div class="ticker">LKQ</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#57606a">Reviewing Strategic Alternatives</span></td>
-          <td data-label="Filed">Jan 26</td><td data-label="Mkt Cap">$8.9B</td><td data-label="P/B">1.40</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="wrap">
-  <div class="section-label">How it works</div>
-  <h2>Three steps, none of them yours.</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div><h3>We read every 8-K, daily</h3><p>Every new filing on EDGAR is scanned for the exact language companies use when something structural is happening &mdash; strategic reviews, special committees, mergers, bankruptcies.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div><h3>We rank by certainty</h3><p>A signed merger agreement isn't the same as a board "considering its options." We sort by how confirmed the event actually is, not just how recent.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div><h3>It lands in your inbox</h3><p>One email each morning. Every entry links straight to the primary filing on EDGAR &mdash; we point, you decide.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="wrap">
-  <div class="section-label">Who reads it</div>
-  <h2>Built for people who act on primary sources.</h2>
-  <div class="audience-grid">
-    <div class="audience-card"><span class="tag">Value &amp; distressed</span><p>Looking for companies trading below tangible book, before a sale process re-rates the stock.</p></div>
-    <div class="audience-card"><span class="tag">Merger arbitrage</span><p>Tracking the spread between today's price and an announced deal price.</p></div>
-    <div class="audience-card"><span class="tag">Credit &amp; distressed debt</span><p>Bankruptcy and restructuring filings matter to bondholders as much as shareholders.</p></div>
-    <div class="audience-card"><span class="tag">Corp dev &amp; deal sourcing</span><p>Same-day awareness of which public companies are formally exploring a sale.</p></div>
-  </div>
-</section>
-
-<section class="wrap">
-  <div class="section-label">Track record</div>
-  <h2>Backtested against real filing history.</h2>
-  <div class="track-record-box">
-    <div class="big-label">Backtested against real filing history</div>
-    <p style="color:var(--paper-dim); margin: 14px 0 24px;">See exactly how many flagged filings led to a completed acquisition, how many ended in bankruptcy, and how prices moved &mdash; broken down by signal type.</p>
-    <a href="track_record.html" class="cta" style="display:inline-block; text-decoration:none;">View the full track record &rarr;</a>
-  </div>
-</section>
-
-<section class="wrap">
-  <div class="section-label">Why I built this</div>
-  <h2>One person's research tool, not a company.</h2>
-  <p class="lead">
-    I spend a lot of time digging through SEC filings by hand &mdash; looking for the kind of mispriced, overlooked situations that don't show up on a normal stock screener. A board quietly hiring a bank to "explore alternatives," a special committee getting formed, a company trading at a steep discount to book value right as something changes.
-  </p>
-  <p class="lead">
-    The problem is that information is buried in individual 8-K filings, not a searchable database, and by the time it shows up in a headline or a stock screener, the opportunity's often already gone. I got tired of manually checking EDGAR every day, so I built a scraper that does it for me &mdash; then I backtested it against thousands of past filings to see if the signal was actually real before trusting it myself.
-  </p>
-  <p class="lead" style="margin-bottom:0;">
-    This is a solo project, still early. I use it myself every morning, and I'm sharing it because I figured other people doing similar research might find it useful too.
-  </p>
-</section>
-
-<footer class="wrap">
-  <h2 style="max-width:20ch;">Get tomorrow's filings in your inbox.</h2>
-  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
-    <label for="email2" style="position:absolute; left:-9999px;">Email address</label>
-    <input type="hidden" name="_subject" value="New FilingBell signup">
-    <input type="email" id="email2" name="email" placeholder="you@email.com" required>
-    <button class="cta" type="submit">Get the daily digest</button>
-  </form>
-  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision.</div>
-</footer>
-
-</body>
-</html>
+  <p class="hero-sub">Every day, public companies quietly tell the SEC they're <em>exploring a sale,
