@@ -368,6 +368,39 @@
     margin-bottom: 6px;
   }
   .faq-a { color: var(--paper-dim); font-size: 15px; }
+
+  .suggestion-form { max-width: 560px; }
+  .suggestion-form textarea {
+    width: 100%;
+    background: var(--ink-soft);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 14px 16px;
+    border-radius: 3px;
+    resize: vertical;
+    margin-bottom: 10px;
+  }
+  .suggestion-form textarea::placeholder { color: var(--paper-dim); }
+  .suggestion-form textarea:focus { outline: 2px solid var(--green); outline-offset: 2px; }
+  .suggestion-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .suggestion-row input[type="email"] {
+    flex: 1 1 240px;
+    background: var(--ink-soft);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 14px 16px;
+    border-radius: 3px;
+  }
+  .suggestion-row input[type="email"]::placeholder { color: var(--paper-dim); }
+  .suggestion-row input[type="email"]:focus { outline: 2px solid var(--green); outline-offset: 2px; }
   .track-record-box .big-label {
     font-family: var(--mono);
     font-size: 13px;
@@ -540,6 +573,21 @@
       <div class="faq-a">Each filing's outcome is confirmed from the company's own later SEC filings (completed-acquisition, bankruptcy, and deregistration filings), not from stock-price data alone, which is unreliable for delisted companies. It's an early project and the numbers still shift as it's refined &mdash; the <a href="track_record.html" style="color:var(--green); border-bottom:1px solid var(--line);">full methodology is here</a>.</div>
     </div>
   </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Feedback</div>
+  <h2>Spot something off? Tell me.</h2>
+  <p class="lead">This is an early, one-person project and I'm genuinely trying to make it better. Trigger phrases worth adding, outcomes that look wrong, features you'd want &mdash; it all helps. Goes straight to my inbox.</p>
+  <form class="suggestion-form" action="https://formspree.io/f/mlgqodop" method="POST">
+    <input type="hidden" name="_subject" value="FilingBell suggestion">
+    <textarea name="suggestion" rows="4" placeholder="What should I fix, change, or add?" required></textarea>
+    <div class="suggestion-row">
+      <label for="reply_email" style="position:absolute; left:-9999px;">Your email (optional)</label>
+      <input type="email" id="reply_email" name="email" placeholder="your email (optional, if you'd like a reply)">
+      <button class="cta" type="submit">Send suggestion</button>
+    </div>
+  </form>
 </section>
 
 <footer class="wrap">
