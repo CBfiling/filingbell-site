@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FilingBell — Track Record</title>
+<meta name="description" content="FilingBell's earlier backtest has been withdrawn for revision. A corrected, clearly hypothetical backtest will be published with full methodology.">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -14,194 +16,55 @@
   }
   * { box-sizing: border-box; }
   body { margin:0; background: var(--ink); color: var(--paper); font-family: var(--body); line-height:1.6; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 60px 24px; }
-  .logo { font-family: var(--mono); font-size: 15px; text-transform: uppercase; margin-bottom: 40px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 60px 24px; }
+  .logo { font-family: var(--mono); font-size: 15px; text-transform: uppercase; }
   .logo b { color: var(--red); }
   h1 { font-family: var(--display); font-weight:700; font-size: clamp(30px, 5vw, 46px); margin: 0 0 12px; }
-  .subtitle { color: var(--paper-dim); font-family: var(--mono); font-size: 13px; margin-bottom: 40px; }
-  table { width:100%; border-collapse: collapse; background: var(--paper); color: var(--ink); border-radius: 6px; overflow:hidden; }
-  th { text-align:left; font-family: var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.04em; color: var(--line); padding:14px 16px; border-bottom:1px solid var(--paper-dim); }
-  td { padding: 14px 16px; border-bottom: 1px solid var(--paper-dim); font-size: 14px; }
-  td.num { font-family: var(--mono); text-align:right; }
-  th:not(:first-child) { text-align:right; }
-  tr:last-child td { border-bottom:none; }
-  .disclaimer { font-family: var(--mono); font-size: 12.5px; color: var(--paper-dim); border-left: 2px solid var(--line); padding-left:16px; margin-top:40px; max-width: 60ch; }
-  .category-badge {
-    display: inline-block;
-    color: white;
-    font-family: var(--mono);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 2px 7px;
-    border-radius: 8px;
-    margin-top: 4px;
-  }
+  h2 { font-family: var(--display); font-weight:600; font-size: 22px; margin: 36px 0 10px; }
+  .subtitle { color: var(--paper-dim); font-family: var(--mono); font-size: 13px; margin-bottom: 32px; }
+  p, li { color: var(--paper-dim); font-size: 16.5px; }
+  li { margin-bottom: 8px; }
+  .notice { border-left: 3px solid var(--red); padding: 4px 0 4px 18px; margin: 0 0 8px; }
+  .notice p { color: var(--paper); margin: 0; }
+  a { color: var(--paper); }
+  .disclaimer { font-family: var(--mono); font-size: 12.5px; color: var(--paper-dim); border-left: 2px solid var(--line); padding-left:16px; margin-top:48px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
-    <div class="logo" style="margin-bottom:0;">Filing<b>Bell</b></div>
+    <div class="logo">Filing<b>Bell</b></div>
     <a href="index.html" style="font-family: var(--mono); font-size: 13px; color: var(--paper-dim); text-decoration:none;">&larr; Back to home</a>
   </div>
+
   <h1>Track Record</h1>
-  <div class="subtitle">Updated July 24, 2026 &middot; 1906 historical filings analyzed &middot; sorted by highest average gain when acquired</div>
+  <div class="subtitle">Withdrawn for revision &middot; November 2026</div>
 
-  <table>
-    <thead>
-      <tr><th>Signal Type</th><th>Filings</th><th>Acquired</th><th>Bankrupt</th><th>Deregistered</th><th>Still Listed</th><th>Avg Gain if Acquired</th><th>Median Gain</th><th>Avg Days to Close</th><th>Avg Change if Active</th></tr>
-    </thead>
-    <tbody>
-      
-    <tr>
-      <td class="label">
-        Exploring Strategic Alternatives
-        <div><span class="category-badge" style="background:#57606a">Early Signal</span></div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--red); margin-top:3px;">3 excluded (bad data)</div>
-      </td>
-      <td class="num">230</td>
-      <td class="num">150</td>
-      <td class="num">5</td>
-      <td class="num">5</td>
-      <td class="num">70</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+24.2% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;16</span></td>
-      <td class="num" style="color:var(--green);">-0.2%</td>
-      <td class="num">307</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+12.9%</td>
-    </tr>
-    
+  <div class="notice">
+    <p>The backtest previously shown on this page has been withdrawn. Its figures should not be relied on.</p>
+  </div>
 
-    <tr>
-      <td class="label">
-        Engaged a Financial Advisor
-        <div><span class="category-badge" style="background:#9a6700">Formal Process</span></div>
-        
-      </td>
-      <td class="num">5</td>
-      <td class="num">5</td>
-      <td class="num">0</td>
-      <td class="num">0</td>
-      <td class="num">0</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+16.9%</td>
-      <td class="num" style="color:var(--green);">+3.1%</td>
-      <td class="num">344</td>
-      <td class="num" style="color:var(--line); font-weight:600;">N/A</td>
-    </tr>
-    
+  <h2>What was wrong</h2>
+  <p>An audit of the backtest found problems that made its results unreliable:</p>
+  <ul>
+    <li><strong>Outcome classification.</strong> A company was counted as &ldquo;acquired&rdquo; if it had <em>ever</em> reported completing an acquisition &mdash; including acquisitions it made itself, and ones before the flagged filing. Most companies labeled &ldquo;acquired&rdquo; were in fact still independently listed.</li>
+    <li><strong>Survivorship bias.</strong> Companies no longer in the SEC's current ticker list &mdash; often the very ones that were actually taken over or went bankrupt &mdash; were left out.</li>
+    <li><strong>Wrong security.</strong> Some companies were priced using a warrant or unit instead of the common stock.</li>
+    <li><strong>No benchmark.</strong> Price changes weren't compared to the overall market.</li>
+  </ul>
 
-    <tr>
-      <td class="label">
-        Strategic Alternatives Process
-        <div><span class="category-badge" style="background:#9a6700">Formal Process</span></div>
-        
-      </td>
-      <td class="num">14</td>
-      <td class="num">12</td>
-      <td class="num">0</td>
-      <td class="num">0</td>
-      <td class="num">2</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+12.9% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;3</span></td>
-      <td class="num" style="color:var(--green);">+4.8%</td>
-      <td class="num">305</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-14.5%</td>
-    </tr>
-    
-
-    <tr>
-      <td class="label">
-        Special Committee Formed
-        <div><span class="category-badge" style="background:#9a6700">Formal Process</span></div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--red); margin-top:3px;">7 excluded (bad data)</div>
-      </td>
-      <td class="num">389</td>
-      <td class="num">272</td>
-      <td class="num">21</td>
-      <td class="num">3</td>
-      <td class="num">93</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+9.9% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;69</span></td>
-      <td class="num" style="color:var(--green);">+0.0%</td>
-      <td class="num">351</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-9.1%</td>
-    </tr>
-    
-
-    <tr>
-      <td class="label">
-        Signed Merger Agreement
-        <div><span class="category-badge" style="background:#1a7f37">Confirmed Deal</span></div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--red); margin-top:3px;">7 excluded (bad data)</div>
-      </td>
-      <td class="num">519</td>
-      <td class="num">421</td>
-      <td class="num">10</td>
-      <td class="num">4</td>
-      <td class="num">84</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+3.3% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;82</span></td>
-      <td class="num" style="color:var(--green);">+1.1%</td>
-      <td class="num">348</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-6.2%</td>
-    </tr>
-    
-
-    <tr>
-      <td class="label">
-        Definitive Merger Agreement
-        <div><span class="category-badge" style="background:#1a7f37">Confirmed Deal</span></div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--red); margin-top:3px;">6 excluded (bad data)</div>
-      </td>
-      <td class="num">227</td>
-      <td class="num">189</td>
-      <td class="num">3</td>
-      <td class="num">1</td>
-      <td class="num">34</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-5.1% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;33</span></td>
-      <td class="num" style="color:var(--red);">+2.2%</td>
-      <td class="num">355</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-1.0%</td>
-    </tr>
-    
-
-    <tr>
-      <td class="label">
-        Reviewing Strategic Alternatives
-        <div><span class="category-badge" style="background:#57606a">Early Signal</span></div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--red); margin-top:3px;">4 excluded (bad data)</div>
-      </td>
-      <td class="num">125</td>
-      <td class="num">89</td>
-      <td class="num">3</td>
-      <td class="num">1</td>
-      <td class="num">32</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-5.2% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;19</span></td>
-      <td class="num" style="color:var(--red);">+0.0%</td>
-      <td class="num">353</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+2.6%</td>
-    </tr>
-    
-
-    <tr>
-      <td class="label">
-        Going-Private Proposal
-        <div><span class="category-badge" style="background:#8a5b00">Going Private</span></div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--red); margin-top:3px;">6 excluded (bad data)</div>
-      </td>
-      <td class="num">397</td>
-      <td class="num">94</td>
-      <td class="num">2</td>
-      <td class="num">1</td>
-      <td class="num">300</td>
-      <td class="num" style="color:var(--red); font-weight:600;">-12.7% <span title="Thinly-traded exit -- price/liquidity less reliable" style="color:var(--red); cursor:help;">&#9888;26</span></td>
-      <td class="num" style="color:var(--red);">-13.4%</td>
-      <td class="num">345</td>
-      <td class="num" style="color:var(--green); font-weight:600;">+9.0%</td>
-    </tr>
-    
-    </tbody>
-  </table>
+  <h2>What comes next</h2>
+  <p>A corrected backtest is planned and will be published here with its full methodology when complete. It will:</p>
+  <ul>
+    <li>be clearly labeled as <strong>hypothetical</strong> results;</li>
+    <li>only count an outcome if it happened <em>after</em> the flagged filing, to the company that filed it;</li>
+    <li>include losers, bankruptcies, and delisted companies;</li>
+    <li>use the common stock, measured over fixed time windows, alongside a market benchmark.</li>
+  </ul>
+  <p>The daily digest previously showed &ldquo;Historically&rdquo; figures from the same backtest; those have been removed as well. The digest continues to report filings as they happen, with a link to each primary source.</p>
 
   <div class="disclaimer">
-    Past results do not predict future outcomes. Status ("acquired," "bankrupt," "deregistered," "still listed") is determined directly from each company's own subsequent SEC filings (8-K Item 2.01, Item 1.03, and Form 15 deregistration filings) -- not from third-party stock price data, which can be unreliable for delisted companies. "Avg/Median Gain if Acquired" and "Avg Days to Close" use each company's last available traded price and date before delisting as an approximation of the actual deal price and closing date -- market prices and timing typically converge close to real deal terms as a merger nears completion, but this is an approximation, not exact contractual terms. Filings with a computed price change outside a realistic range (most likely caused by ticker reuse, where a delisted ticker symbol gets recycled for a later, unrelated company) are excluded from all averages and counted separately, shown under each signal type where this occurred. A &#9888; warning marks signal types where one or more acquisitions had thin trading volume (under 25,000 avg daily shares) near exit -- the price/liquidity for those specific cases is less reliable, and thin liquidity is itself a real risk for anyone trying to trade a similar situation. "Avg Change if Active" only includes filings at least 90 days old, to exclude situations too recent to have had time to resolve. None of these figures are investment advice.
+    FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Backtested results are hypothetical, have inherent limitations, and do not predict future outcomes. Always read the primary filing before making a decision.
   </div>
 </div>
 </body>

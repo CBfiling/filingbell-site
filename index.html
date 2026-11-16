@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FilingBell — Know When a Company Files Something Big</title>
-<meta name="description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Backtested against thousands of historical filings.">
+<meta name="description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Every entry links to the primary filing.">
 <link rel="icon" type="image/png" href="favicon.png">
 
 <meta property="og:title" content="FilingBell — Know When a Company Files Something Big">
-<meta property="og:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against thousands of historical filings — see real completion rates by signal type.">
+<meta property="og:description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies.">
 <meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cbfiling.github.io/filingbell-site/">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FilingBell — Know When a Company Files Something Big">
-<meta name="twitter:description" content="Daily email alerts for SEC 8-K filings signaling special situations. Backtested against thousands of historical filings.">
+<meta name="twitter:description" content="Daily email alerts for SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies.">
 <meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -437,16 +437,6 @@
   <h1>Know the moment a company puts itself in play.</h1>
   <p class="hero-sub">Every day, public companies quietly tell the SEC they're <em>exploring a sale, forming a special committee, or filing for bankruptcy</em> &mdash; buried in 8-Ks nobody reads until it's news. FilingBell reads all of them, the day they're filed.</p>
 
-  <div class="stat-strip">
-    <div class="stat">
-      <div class="stat-num">+25.6%</div>
-      <div class="stat-label">avg gain when an early "exploring alternatives" filing led to a completed deal (backtested)</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">24%</div>
-      <div class="stat-label">of going-private proposals actually completed &mdash; far lower than most assume</div>
-    </div>
-  </div>
 
   <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
     <label for="email" style="position:absolute; left:-9999px;">Email address</label>
@@ -454,7 +444,7 @@
     <input type="email" id="email" name="email" placeholder="you@email.com" required>
     <button class="cta" type="submit">Get the daily digest</button>
   </form>
-  <div class="form-note">Free while in early access. One email a day. Unsubscribe anytime. <a href="track_record.html" style="color:var(--paper-dim); border-bottom:1px solid var(--line);">See the full backtest &rarr;</a></div>
+  <div class="form-note">Free while in early access. One email a day. Unsubscribe anytime.</div>
 </header>
 
 <section class="wrap">
@@ -515,7 +505,7 @@
 <section class="wrap">
   <div class="section-label">Who reads it</div>
   <h2>Built for people who act on primary sources.</h2>
-  <p class="lead">A small but growing group of value, merger-arb, and distressed investors get this in their inbox each morning. It's built for a few specific kinds of reader:</p>
+  <p class="lead">It's built for a few specific kinds of reader:</p>
   <div class="audience-grid">
     <div class="audience-card"><span class="tag">Value &amp; distressed</span><p>Looking for companies trading below tangible book, before a sale process re-rates the stock.</p></div>
     <div class="audience-card"><span class="tag">Merger arbitrage</span><p>Tracking the spread between today's price and an announced deal price.</p></div>
@@ -526,11 +516,11 @@
 
 <section class="wrap">
   <div class="section-label">Track record</div>
-  <h2>Backtested against real filing history.</h2>
+  <h2>Being rebuilt.</h2>
   <div class="track-record-box">
-    <div class="big-label">Backtested against real filing history</div>
-    <p style="color:var(--paper-dim); margin: 14px 0 24px;">See exactly how many flagged filings led to a completed acquisition, how many ended in bankruptcy, and how prices moved &mdash; broken down by signal type.</p>
-    <a href="track_record.html" class="cta" style="display:inline-block; text-decoration:none;">View the full track record &rarr;</a>
+    <div class="big-label">Backtest withdrawn for revision</div>
+    <p style="color:var(--paper-dim); margin: 14px 0 24px;">An audit found a flaw in how the earlier backtest classified outcomes, so those figures have been taken down. A corrected backtest &mdash; clearly labeled as hypothetical, including losers and delisted companies, and compared against a market benchmark &mdash; is planned and will be published here with its full methodology when complete.</p>
+    <a href="track_record.html" class="cta" style="display:inline-block; text-decoration:none;">Read what changed &rarr;</a>
   </div>
 </section>
 
@@ -541,7 +531,7 @@
     I spend a lot of time digging through SEC filings by hand &mdash; looking for the kind of mispriced, overlooked situations that don't show up on a normal stock screener. A board quietly hiring a bank to "explore alternatives," a special committee getting formed, a company trading at a steep discount to book value right as something changes.
   </p>
   <p class="lead">
-    The problem is that information is buried in individual 8-K filings, not a searchable database, and by the time it shows up in a headline or a stock screener, the opportunity's often already gone. I got tired of manually checking EDGAR every day, so I built a scraper that does it for me &mdash; then I backtested it against thousands of past filings to see if the signal was actually real before trusting it myself.
+    The problem is that information is buried in individual 8-K filings, not a searchable database, and by the time it shows up in a headline or a stock screener, the opportunity's often already gone. I got tired of manually checking EDGAR every day, so I built a scraper that does it for me. Measuring what happens after these filings is ongoing work &mdash; the first backtest had a flaw and has been withdrawn while a corrected version is built.
   </p>
   <p class="lead" style="margin-bottom:0;">
     This is a solo project, still early. I use it myself every morning, and I'm sharing it because I figured other people doing similar research might find it useful too.
@@ -558,7 +548,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">What do you do with my email?</div>
-      <div class="faq-a">It's used to send you the digest, and nothing else. It isn't sold, shared, or handed to any third party. You can unsubscribe any time.</div>
+      <div class="faq-a">It's used to send you the digest, and nothing else. It isn't sold or shared for marketing. It's processed only by the services that run the signup form (Formspree) and send the email (Gmail). You can unsubscribe any time by replying to any digest.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Is this investment advice?</div>
@@ -569,8 +559,8 @@
       <div class="faq-a">Standard screeners filter on numbers (P/E, market cap, ROE). They have no concept of "this company just told the SEC it's exploring a sale," because that lives in unstructured filing text, not a data field. FilingBell reads that text.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Where do the backtest numbers come from?</div>
-      <div class="faq-a">Each filing's outcome is confirmed from the company's own later SEC filings (completed-acquisition, bankruptcy, and deregistration filings), not from stock-price data alone, which is unreliable for delisted companies. It's an early project and the numbers still shift as it's refined &mdash; the <a href="track_record.html" style="color:var(--green); border-bottom:1px solid var(--line);">full methodology is here</a>.</div>
+      <div class="faq-q">Where did the backtest numbers go?</div>
+      <div class="faq-a">They were withdrawn after an audit found that the outcome classification counted many companies as &ldquo;acquired&rdquo; that were still independently listed. Rather than leave inaccurate figures up, they've been removed while a corrected, clearly hypothetical backtest is built. <a href="track_record.html" style="color:var(--green); border-bottom:1px solid var(--line);">Details here</a>.</div>
     </div>
   </div>
 </section>
