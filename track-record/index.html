@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track record — FilingBell</title>
+<meta name="description" content="FilingBell&#39;s earlier backtest has been withdrawn for revision. A corrected, clearly hypothetical backtest will be published with full methodology.">
+<link rel="canonical" href="https://cbfiling.github.io/filingbell-site/track-record/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/png" href="../favicon.png?v=30dc208ea3">
+
+<meta property="og:site_name" content="FilingBell">
+<meta property="og:title" content="Track record — FilingBell">
+<meta property="og:description" content="FilingBell&#39;s earlier backtest has been withdrawn for revision. A corrected, clearly hypothetical backtest will be published with full methodology.">
+<meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbfiling.github.io/filingbell-site/track-record/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Track record — FilingBell">
+<meta name="twitter:description" content="FilingBell&#39;s earlier backtest has been withdrawn for revision. A corrected, clearly hypothetical backtest will be published with full methodology.">
+<meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css?v=ae4f66d09b">
+<script>try{var t=localStorage.getItem('fb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script src="../theme.js?v=34ea638ee7" defer></script>
+</head>
+<body>
+
+<nav class="wrap" aria-label="Main">
+  <a class="logo" href="../index.html">Filing<b>Bell</b></a>
+  <div class="nav-right">
+    <div class="nav-links">SEC EDGAR &middot; 8-K, Form 4, 13D/G, 13F &middot; Daily</div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" hidden><span aria-hidden="true">&#9680;</span><span class="visually-hidden">Dark theme</span></button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="../feed/index.html">Feed</a></li>
+    <li><a href="../special-situations/index.html">Special situations</a></li>
+    <li><a href="../insiders/index.html">Insiders</a></li>
+    <li><a href="../institutions/index.html">Institutions</a></li>
+    <li><a href="../daily/index.html">Daily</a></li>
+  </ul>
+</nav>
+
+<main>
+<article class="page-head wrap prose">
+  <h1 class="page-title">Track Record</h1>
+  <div class="subtitle">Withdrawn for revision &middot; November 2026</div>
+
+  <div class="notice">
+    <p>The backtest previously shown on this page has been withdrawn. Its figures should not be relied on.</p>
+  </div>
+
+  <h2>What was wrong</h2>
+  <p>An audit of the backtest found problems that made its results unreliable:</p>
+  <ul>
+    <li><strong>Outcome classification.</strong> A company was counted as &ldquo;acquired&rdquo; if it had <em>ever</em> reported completing an acquisition &mdash; including acquisitions it made itself, and ones before the flagged filing. Most companies labeled &ldquo;acquired&rdquo; were in fact still independently listed.</li>
+    <li><strong>Survivorship bias.</strong> Companies no longer in the SEC's current ticker list &mdash; often the very ones that were actually taken over or went bankrupt &mdash; were left out.</li>
+    <li><strong>Wrong security.</strong> Some companies were priced using a warrant or unit instead of the common stock.</li>
+    <li><strong>No benchmark.</strong> Price changes weren't compared to the overall market.</li>
+  </ul>
+
+  <h2>What comes next</h2>
+  <p>A corrected backtest is planned and will be published here with its full methodology when complete. It will:</p>
+  <ul>
+    <li>be clearly labeled as <strong>hypothetical</strong> results;</li>
+    <li>only count an outcome if it happened <em>after</em> the flagged filing, to the company that filed it;</li>
+    <li>include losers, bankruptcies, and delisted companies;</li>
+    <li>use the common stock, measured over fixed time windows, alongside a market benchmark.</li>
+  </ul>
+  <p>The daily digest previously showed &ldquo;Historically&rdquo; figures from the same backtest; those have been removed as well. When the daily digest opens to subscribers, it will report filings as they happen, with a link to each primary source.</p>
+
+  <div class="disclaimer">
+    FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Backtested results are hypothetical, have inherent limitations, and do not predict future outcomes. Always read the primary filing before making a decision.
+  </div>
+</article>
+</main>
+
+<footer class="wrap">
+  <h2>Join the waitlist for the daily digest.</h2>
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="footer-email" class="visually-hidden">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
+    <input type="email" id="footer-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <button class="cta" type="submit">Join the waitlist</button>
+  </form>
+  <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
+  <nav class="footer-nav" aria-label="About FilingBell">
+    <ul>
+      <li><a href="../methodology/index.html">Methodology</a></li>
+      <li><a href="../track-record/index.html" aria-current="page">Track record</a></li>
+    </ul>
+  </nav>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision. Data is drawn from SEC EDGAR and may be delayed, incomplete or contain parsing errors. FilingBell is not affiliated with or endorsed by the SEC.</div>
+</footer>
+
+</body>
+</html>

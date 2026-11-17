@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FilingBell — Know When a Company Files Something Big</title>
 <meta name="description" content="A daily digest of SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Every entry links to the primary filing. Join the waitlist for the email digest.">
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="canonical" href="https://cbfiling.github.io/filingbell-site/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/png" href="favicon.png?v=30dc208ea3">
 
+<meta property="og:site_name" content="FilingBell">
 <meta property="og:title" content="FilingBell — Know When a Company Files Something Big">
 <meta property="og:description" content="A daily digest of SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Join the waitlist.">
 <meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
@@ -18,430 +22,44 @@
 <meta name="twitter:description" content="A daily digest of SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Join the waitlist.">
 <meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #14213D;
-    --ink-soft: #1E2E52;
-    --paper: #ECE7D8;
-    --paper-dim: #DCD6C3;
-    --red: #B23A2E;
-    --green: #4C7A5E;
-    --line: #5B6B7A;
-    --display: 'Zilla Slab', serif;
-    --body: 'Source Serif 4', serif;
-    --mono: 'IBM Plex Mono', monospace;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--body);
-    line-height: 1.6;
-  }
-
-  a { color: inherit; }
-
-  .wrap {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ---------- NAV ---------- */
-  nav.wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 28px;
-    padding-bottom: 28px;
-  }
-  .logo {
-    font-family: var(--mono);
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .logo b { color: var(--red); }
-  .nav-links { font-family: var(--mono); font-size: 13px; color: var(--paper-dim); }
-
-  /* ---------- HERO ---------- */
-  header.hero {
-    padding: 40px 0 90px;
-    position: relative;
-    overflow: visible;
-  }
-
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--paper-dim);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-  .eyebrow::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    background: var(--green);
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  h1 {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(38px, 6vw, 64px);
-    line-height: 1.05;
-    margin: 0 0 26px;
-    max-width: 11ch;
-  }
-
-  .hero-sub {
-    font-size: 19px;
-    color: var(--paper-dim);
-    max-width: 46ch;
-    margin: 0 0 40px;
-  }
-
-  .hero-sub em { color: var(--paper); font-style: normal; border-bottom: 1px solid var(--red); }
-
-  .stat-strip {
-    display: flex;
-    gap: 24px;
-    margin: 0 0 36px;
-    flex-wrap: wrap;
-  }
-  .stat {
-    flex: 1 1 200px;
-    border-left: 2px solid var(--red);
-    padding-left: 16px;
-  }
-  .stat-num {
-    font-family: var(--display);
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--paper);
-    line-height: 1.1;
-  }
-  .stat-label {
-    font-size: 13px;
-    color: var(--paper-dim);
-    margin-top: 6px;
-    max-width: 34ch;
-  }
-
-  /* Stamp element -- the signature piece */
-  .stamp {
-    position: absolute;
-    top: 30px;
-    right: 24px;
-    width: 138px;
-    height: 138px;
-    border: 3px solid var(--red);
-    border-radius: 50%;
-    color: var(--red);
-    font-family: var(--mono);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transform: rotate(9deg);
-    opacity: 0.9;
-    animation: stampIn 0.5s cubic-bezier(.2,1.4,.4,1) 0.15s both;
-  }
-  .stamp-inner {
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    line-height: 1.5;
-  }
-  .stamp-inner .big { font-size: 20px; font-weight: 700; display: block; letter-spacing: 0.08em; }
-
-  @keyframes stampIn {
-    from { transform: rotate(9deg) scale(2.4); opacity: 0; }
-    to   { transform: rotate(9deg) scale(1); opacity: 0.9; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .stamp { animation: none; }
-  }
-  @media (max-width: 640px) {
-    .stamp { position: static; margin-bottom: 28px; transform: rotate(-3deg); }
-  }
-
-  /* ---------- SIGNUP FORM ---------- */
-  form.signup {
-    display: flex;
-    gap: 10px;
-    max-width: 460px;
-    flex-wrap: wrap;
-  }
-  input[type="email"] {
-    flex: 1 1 240px;
-    background: var(--ink-soft);
-    border: 1px solid var(--line);
-    color: var(--paper);
-    font-family: var(--mono);
-    font-size: 14px;
-    padding: 14px 16px;
-    border-radius: 3px;
-  }
-  input[type="email"]::placeholder { color: var(--paper-dim); }
-  input[type="email"]:focus, button:focus {
-    outline: 2px solid var(--green);
-    outline-offset: 2px;
-  }
-  button.cta, a.cta {
-    background: var(--red);
-    color: var(--paper);
-    border: none;
-    font-family: var(--mono);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.03em;
-    padding: 14px 22px;
-    border-radius: 3px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  button.cta:hover, a.cta:hover { background: #9c2f25; }
-  .form-note {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--paper-dim);
-    margin-top: 12px;
-  }
-
-  /* ---------- SECTION SCAFFOLDING ---------- */
-  section { padding: 64px 0; border-top: 1px solid rgba(236,231,216,0.15); }
-  .section-label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 18px;
-  }
-  h2 {
-    font-family: var(--display);
-    font-size: clamp(26px, 4vw, 34px);
-    font-weight: 600;
-    margin: 0 0 20px;
-    max-width: 22ch;
-  }
-  .lead { color: var(--paper-dim); max-width: 56ch; font-size: 17px; margin-bottom: 40px; }
-
-  /* ---------- SAMPLE DIGEST TABLE ---------- */
-  .digest-frame {
-    background: var(--paper);
-    color: var(--ink);
-    border-radius: 6px;
-    padding: 4px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  thead th {
-    text-align: left;
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--line);
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--paper-dim);
-  }
-  tbody td { padding: 14px 16px; border-bottom: 1px solid var(--paper-dim); vertical-align: top; }
-  tbody tr:last-child td { border-bottom: none; }
-  .company { font-weight: 600; font-family: var(--body); }
-  .ticker { font-family: var(--mono); font-size: 12px; color: var(--line); }
-  .badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 10px;
-    color: white;
-    white-space: nowrap;
-  }
-
-  /* ---------- MOBILE-ONLY: stack the digest table as cards instead of
-     a wide table, since the longer signal labels no longer fit in a row
-     on narrow screens. Desktop table styles above are untouched. ---------- */
-  @media (max-width: 640px) {
-    .digest-frame table,
-    .digest-frame thead,
-    .digest-frame tbody,
-    .digest-frame th,
-    .digest-frame td,
-    .digest-frame tr {
-      display: block;
-    }
-    .digest-frame thead { display: none; }
-    .digest-frame tr {
-      border-bottom: 2px solid var(--paper-dim);
-      padding: 12px 0;
-    }
-    .digest-frame tbody tr:last-child { border-bottom: none; }
-    .digest-frame td {
-      border-bottom: none;
-      padding: 4px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    .digest-frame td[data-label]::before {
-      content: attr(data-label);
-      font-family: var(--mono);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--line);
-      flex-shrink: 0;
-    }
-    .digest-frame td[data-label="Company"] {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-      padding-top: 8px;
-    }
-    .digest-frame td[data-label="Company"]::before { display: none; }
-  }
-
-  /* ---------- HOW IT WORKS ---------- */
-  .steps { display: grid; gap: 28px; }
-  .step { display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; }
-  .step-num {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--ink);
-    background: var(--paper);
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 600;
-  }
-  .step h3 { font-family: var(--display); font-size: 18px; margin: 8px 0 6px; font-weight: 600; }
-  .step p { color: var(--paper-dim); margin: 0; font-size: 15px; max-width: 52ch; }
-
-  /* ---------- WHO IT'S FOR ---------- */
-  .audience-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1px;
-    background: rgba(236,231,216,0.15);
-    border: 1px solid rgba(236,231,216,0.15);
-  }
-  .audience-card { background: var(--ink); padding: 24px; }
-  .audience-card .tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--red);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 10px;
-    display: block;
-  }
-  .audience-card p { margin: 0; font-size: 14.5px; color: var(--paper-dim); }
-
-  /* ---------- TRACK RECORD ---------- */
-  .track-record-box {
-    border: 1px dashed var(--line);
-    border-radius: 6px;
-    padding: 32px;
-    text-align: center;
-  }
-  .faq { display: grid; gap: 24px; }
-  .faq-item { max-width: 62ch; }
-  .faq-q {
-    font-family: var(--display);
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--paper);
-    margin-bottom: 6px;
-  }
-  .faq-a { color: var(--paper-dim); font-size: 15px; }
-
-  .suggestion-form { max-width: 560px; }
-  .suggestion-form textarea {
-    width: 100%;
-    background: var(--ink-soft);
-    border: 1px solid var(--line);
-    color: var(--paper);
-    font-family: var(--mono);
-    font-size: 14px;
-    padding: 14px 16px;
-    border-radius: 3px;
-    resize: vertical;
-    margin-bottom: 10px;
-  }
-  .suggestion-form textarea::placeholder { color: var(--paper-dim); }
-  .suggestion-form textarea:focus { outline: 2px solid var(--green); outline-offset: 2px; }
-  .suggestion-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .suggestion-row input[type="email"] {
-    flex: 1 1 240px;
-    background: var(--ink-soft);
-    border: 1px solid var(--line);
-    color: var(--paper);
-    font-family: var(--mono);
-    font-size: 14px;
-    padding: 14px 16px;
-    border-radius: 3px;
-  }
-  .suggestion-row input[type="email"]::placeholder { color: var(--paper-dim); }
-  .suggestion-row input[type="email"]:focus { outline: 2px solid var(--green); outline-offset: 2px; }
-  .track-record-box .big-label {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--paper-dim);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer { padding: 50px 0 60px; }
-  .disclaimer {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--paper-dim);
-    max-width: 60ch;
-    border-left: 2px solid var(--line);
-    padding-left: 16px;
-    margin-top: 40px;
-  }
-</style>
+<link rel="stylesheet" href="site.css?v=ae4f66d09b">
+<script>try{var t=localStorage.getItem('fb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script src="theme.js?v=34ea638ee7" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://cbfiling.github.io/filingbell-site/#website","name":"FilingBell","url":"https://cbfiling.github.io/filingbell-site/","description":"FilingBell lists SEC EDGAR filings that report corporate events such as merger agreements, strategic reviews, insider purchases and 5% ownership stakes, each linked to the filing.","inLanguage":"en","publisher":{"@id":"https://cbfiling.github.io/filingbell-site/#organization"}},{"@type":"Organization","@id":"https://cbfiling.github.io/filingbell-site/#organization","name":"FilingBell","url":"https://cbfiling.github.io/filingbell-site/","logo":"https://cbfiling.github.io/filingbell-site/profile_picture.png"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"The digest isn't open yet \u2014 right now there's a waitlist. It will be free during early access, with no paid tier and no credit card. If that changes later, subscribers will hear about it first \u2014 nothing gets charged without asking."}},{"@type":"Question","name":"What do you do with my email?","acceptedAnswer":{"@type":"Answer","text":"For now it's used only to tell you when the daily digest opens, and nothing else. It isn't sold or shared for marketing. It's collected by Formspree, the service that runs the waitlist form, which stores it and forwards each signup to my email inbox. When the digest opens, your address will be moved to an email delivery service, and you'll be asked to confirm before receiving the digest \u2014 if you don't confirm, you won't get it. Every digest will include an unsubscribe link. To be removed from the waitlist before then, send a note through the suggestion form below and include the email address you signed up with."}},{"@type":"Question","name":"Is this investment advice?","acceptedAnswer":{"@type":"Answer","text":"No. FilingBell surfaces public SEC filings and points you to the primary source. It never tells you to buy or sell anything \u2014 you read the actual filing and decide for yourself."}},{"@type":"Question","name":"How is this different from a stock screener?","acceptedAnswer":{"@type":"Answer","text":"Standard screeners filter on numbers (P/E, market cap, ROE). They have no concept of \"this company just told the SEC it's exploring a sale,\" because that lives in unstructured filing text, not a data field. FilingBell reads that text."}},{"@type":"Question","name":"Where did the backtest numbers go?","acceptedAnswer":{"@type":"Answer","text":"They were withdrawn after an audit found that the outcome classification counted many companies as \u201cacquired\u201d that were still independently listed. Rather than leave inaccurate figures up, they've been removed while a corrected, clearly hypothetical backtest is built. Details are on the track record page."}}]}</script>
 </head>
 <body>
 
-<nav class="wrap">
-  <div class="logo">Filing<b>Bell</b></div>
-  <div class="nav-links">SEC EDGAR &middot; 8-K Filings &middot; Daily</div>
+<nav class="wrap" aria-label="Main">
+  <a class="logo" href="index.html">Filing<b>Bell</b></a>
+  <div class="nav-right">
+    <div class="nav-links">SEC EDGAR &middot; 8-K, Form 4, 13D/G, 13F &middot; Daily</div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" hidden><span aria-hidden="true">&#9680;</span><span class="visually-hidden">Dark theme</span></button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="feed/index.html">Feed</a></li>
+    <li><a href="special-situations/index.html">Special situations</a></li>
+    <li><a href="insiders/index.html">Insiders</a></li>
+    <li><a href="institutions/index.html">Institutions</a></li>
+    <li><a href="daily/index.html">Daily</a></li>
+  </ul>
 </nav>
 
+<main>
 <header class="hero wrap">
-  <div class="stamp">
+  <div class="stamp" aria-hidden="true">
     <div class="stamp-inner">NEW<span class="big">8-K</span>TODAY</div>
   </div>
   <div class="eyebrow">Scanning EDGAR every day</div>
   <h1>Know the day a company puts itself in play.</h1>
   <p class="hero-sub">Every day, public companies quietly tell the SEC they're <em>exploring a sale, forming a special committee, or filing for bankruptcy</em> &mdash; buried in 8-Ks nobody reads until it's news. FilingBell reads all of them, the day they're filed.</p>
 
-
   <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
-    <label for="email" style="position:absolute; left:-9999px;">Email address</label>
+    <label for="email" class="visually-hidden">Email address</label>
     <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
-    <input type="email" id="email" name="email" placeholder="you@email.com" required>
+    <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required>
     <button class="cta" type="submit">Join the waitlist</button>
   </form>
   <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
@@ -452,32 +70,32 @@
   <h2>This is what the daily digest will look like.</h2>
   <p class="lead">Real filings, ranked by how confirmed the event actually is &mdash; a signed merger agreement first, a board "exploring options" further down.</p>
 
-  <p class="lead" style="font-size:14px;">Illustrative entries from past filings; market cap and P/B as of the filing date. Not a recommendation to buy or sell any security.</p>
   <div class="digest-frame">
     <table>
+      <caption>Illustrative entries from past filings. Not a recommendation to buy or sell any security.</caption>
       <thead>
-        <tr><th>Company</th><th>Signal</th><th>Filed</th><th>Mkt Cap</th><th>P/B</th></tr>
+        <tr><th scope="col">Company</th><th scope="col">Signal</th><th scope="col">Filed</th></tr>
       </thead>
       <tbody>
         <tr>
           <td data-label="Company"><div class="company">Lulu's Fashion Lounge</div><div class="ticker">LVLU</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#9a6700">Special Committee Formed</span></td>
-          <td data-label="Filed">Jul 13</td><td data-label="Mkt Cap">$45.0M</td><td data-label="P/B">0.62</td>
+          <td data-label="Signal"><span class="badge badge-amber">Special Committee Formed</span></td>
+          <td data-label="Filed">Jul 13</td>
         </tr>
         <tr>
           <td data-label="Company"><div class="company">Aterian, Inc.</div><div class="ticker">ATER</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#9a6700">Strategic Alternatives Process</span></td>
-          <td data-label="Filed">Mar 23</td><td data-label="Mkt Cap">$18.0M</td><td data-label="P/B">0.34</td>
+          <td data-label="Signal"><span class="badge badge-amber">Strategic Alternatives Process</span></td>
+          <td data-label="Filed">Mar 23</td>
         </tr>
         <tr>
           <td data-label="Company"><div class="company">Domo, Inc.</div><div class="ticker">DOMO</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#57606a">Exploring Strategic Alternatives</span></td>
-          <td data-label="Filed">Feb 19</td><td data-label="Mkt Cap">$210.0M</td><td data-label="P/B">3.10</td>
+          <td data-label="Signal"><span class="badge badge-slate">Exploring Strategic Alternatives</span></td>
+          <td data-label="Filed">Feb 19</td>
         </tr>
         <tr>
           <td data-label="Company"><div class="company">LKQ Corp</div><div class="ticker">LKQ</div></td>
-          <td data-label="Signal"><span class="badge" style="background:#57606a">Reviewing Strategic Alternatives</span></td>
-          <td data-label="Filed">Jan 26</td><td data-label="Mkt Cap">$8.9B</td><td data-label="P/B">1.40</td>
+          <td data-label="Signal"><span class="badge badge-slate">Reviewing Strategic Alternatives</span></td>
+          <td data-label="Filed">Jan 26</td>
         </tr>
       </tbody>
     </table>
@@ -520,8 +138,8 @@
   <h2>Being rebuilt.</h2>
   <div class="track-record-box">
     <div class="big-label">Backtest withdrawn for revision</div>
-    <p style="color:var(--paper-dim); margin: 14px 0 24px;">An audit found a flaw in how the earlier backtest classified outcomes, so those figures have been taken down. A corrected backtest &mdash; clearly labeled as hypothetical, including losers and delisted companies, and compared against a market benchmark &mdash; is planned and will be published here with its full methodology when complete.</p>
-    <a href="track_record.html" class="cta" style="display:inline-block; text-decoration:none;">Read what changed &rarr;</a>
+    <p>An audit found a flaw in how the earlier backtest classified outcomes, so those figures have been taken down. A corrected backtest &mdash; clearly labeled as hypothetical, including losers and delisted companies, and compared against a market benchmark &mdash; is planned and will be published here with its full methodology when complete.</p>
+    <a href="track-record/index.html" class="cta">Read what changed &rarr;</a>
   </div>
 </section>
 
@@ -534,7 +152,7 @@
   <p class="lead">
     The problem is that information is buried in individual 8-K filings, not a searchable database, and by the time it shows up in a headline or a stock screener, it's often old news. I got tired of manually checking EDGAR every day, so I built a scraper that does it for me. Measuring what happens after these filings is ongoing work &mdash; the first backtest had a flaw and has been withdrawn while a corrected version is built.
   </p>
-  <p class="lead" style="margin-bottom:0;">
+  <p class="lead last">
     This is a solo project, still early. I use it myself every morning, and I'm sharing it because I figured other people doing similar research might find it useful too.
   </p>
 </section>
@@ -561,36 +179,44 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">Where did the backtest numbers go?</div>
-      <div class="faq-a">They were withdrawn after an audit found that the outcome classification counted many companies as &ldquo;acquired&rdquo; that were still independently listed. Rather than leave inaccurate figures up, they've been removed while a corrected, clearly hypothetical backtest is built. <a href="track_record.html" style="color:var(--green); border-bottom:1px solid var(--line);">Details here</a>.</div>
+      <div class="faq-a">They were withdrawn after an audit found that the outcome classification counted many companies as &ldquo;acquired&rdquo; that were still independently listed. Rather than leave inaccurate figures up, they've been removed while a corrected, clearly hypothetical backtest is built. Details are on the <a href="track-record/index.html" class="text-link">track record page</a>.</div>
     </div>
   </div>
 </section>
 
-<section class="wrap">
+<section class="wrap" id="feedback">
   <div class="section-label">Feedback</div>
   <h2>Spot something off? Tell me.</h2>
   <p class="lead">This is an early, one-person project and I'm genuinely trying to make it better. Trigger phrases worth adding, outcomes that look wrong, features you'd want &mdash; it all helps. Goes straight to my inbox.</p>
   <form class="suggestion-form" action="https://formspree.io/f/mlgqodop" method="POST">
     <input type="hidden" name="_subject" value="FilingBell suggestion">
-    <textarea name="suggestion" rows="4" placeholder="What should I fix, change, or add?" required></textarea>
+    <label for="suggestion" class="visually-hidden">Your suggestion</label>
+    <textarea id="suggestion" name="suggestion" rows="4" placeholder="What should I fix, change, or add?" required></textarea>
     <div class="suggestion-row">
-      <label for="reply_email" style="position:absolute; left:-9999px;">Your email (optional)</label>
-      <input type="email" id="reply_email" name="email" placeholder="your email (optional, if you'd like a reply)">
+      <label for="reply_email" class="visually-hidden">Your email (optional)</label>
+      <input type="email" id="reply_email" name="email" placeholder="your email (optional, if you'd like a reply)" autocomplete="email">
       <button class="cta" type="submit">Send suggestion</button>
     </div>
   </form>
 </section>
+</main>
 
 <footer class="wrap">
-  <h2 style="max-width:20ch;">Be first to know when the digest opens.</h2>
+  <h2>Be first to know when the digest opens.</h2>
   <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
-    <label for="email2" style="position:absolute; left:-9999px;">Email address</label>
+    <label for="footer-email" class="visually-hidden">Email address</label>
     <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
-    <input type="email" id="email2" name="email" placeholder="you@email.com" required>
+    <input type="email" id="footer-email" name="email" placeholder="you@email.com" autocomplete="email" required>
     <button class="cta" type="submit">Join the waitlist</button>
   </form>
   <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
-  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision.</div>
+  <nav class="footer-nav" aria-label="About FilingBell">
+    <ul>
+      <li><a href="methodology/index.html">Methodology</a></li>
+      <li><a href="track-record/index.html">Track record</a></li>
+    </ul>
+  </nav>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision. Data is drawn from SEC EDGAR and may be delayed, incomplete or contain parsing errors. FilingBell is not affiliated with or endorsed by the SEC.</div>
 </footer>
 
 </body>
