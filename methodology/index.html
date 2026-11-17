@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methodology — FilingBell</title>
+<meta name="description" content="How FilingBell reads SEC EDGAR filings: sources, schedule, the rules that turn a filing into an entry, the 1-to-5 strength scale, tickers and known limitations.">
+<link rel="canonical" href="https://cbfiling.github.io/filingbell-site/methodology/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/png" href="../favicon.png?v=30dc208ea3">
+
+<meta property="og:site_name" content="FilingBell">
+<meta property="og:title" content="Methodology — FilingBell">
+<meta property="og:description" content="How FilingBell turns SEC EDGAR filings into entries, and where it can be wrong.">
+<meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbfiling.github.io/filingbell-site/methodology/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Methodology — FilingBell">
+<meta name="twitter:description" content="How FilingBell turns SEC EDGAR filings into entries, and where it can be wrong.">
+<meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css?v=ae4f66d09b">
+<script>try{var t=localStorage.getItem('fb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script src="../theme.js?v=34ea638ee7" defer></script>
+</head>
+<body>
+
+<nav class="wrap" aria-label="Main">
+  <a class="logo" href="../index.html">Filing<b>Bell</b></a>
+  <div class="nav-right">
+    <div class="nav-links">SEC EDGAR &middot; 8-K, Form 4, 13D/G, 13F &middot; Daily</div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" hidden><span aria-hidden="true">&#9680;</span><span class="visually-hidden">Dark theme</span></button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="../feed/index.html">Feed</a></li>
+    <li><a href="../special-situations/index.html">Special situations</a></li>
+    <li><a href="../insiders/index.html">Insiders</a></li>
+    <li><a href="../institutions/index.html">Institutions</a></li>
+    <li><a href="../daily/index.html">Daily</a></li>
+  </ul>
+</nav>
+
+<main>
+<article class="page-head wrap prose">
+  <div class="section-label">How it works</div>
+  <h1 class="page-title">Methodology</h1>
+  <p class="lead">How FilingBell collects SEC filings, how a filing becomes an entry on this site, and where it can be wrong. This page describes the fixed rules FilingBell applies; none of it is a judgment about any company or security.</p>
+
+  <h2 id="data-source">Data source</h2>
+  <p>Every entry comes from a filing on SEC EDGAR, the Securities and Exchange Commission's public filing system. FilingBell reads EDGAR's daily form index, the list of everything filed on a business day, and then downloads the filings of the form types described below. It does not use stock prices or any other market data, news, or paid data sources. Each entry links to the filing on EDGAR.</p>
+
+  <h2 id="schedule">When it runs</h2>
+  <p>FilingBell runs once each morning, US/Eastern. Each run processes the filings EDGAR listed for the previous business day, so an entry usually appears the morning after its filing date. If a run fails, the next run picks up the business days it missed, up to five business days back.</p>
+  <p>EDGAR publishes no daily index on weekends or on US federal holidays, when the SEC is closed, so those days have no entries. The holidays in 2026 are Jan 1, 2026, Jan 19, 2026, Feb 16, 2026, May 25, 2026, Jun 19, 2026, Jul 3, 2026, Sep 7, 2026, Oct 12, 2026, Nov 11, 2026, Nov 26, 2026 and Dec 25, 2026. EDGAR can also close on other days the federal government closes.</p>
+
+  <h2 id="coverage">What is covered</h2>
+  <p>FilingBell reads six groups of filings. For each, this is what it reads and what turns a filing into an entry.</p>
+
+  <h3 id="form-8k">Form 8-K</h3>
+  <p>A company files a Form 8-K to report specified events, and sometimes to disclose others voluntarily. FilingBell reads two things in each 8-K:</p>
+  <ul>
+    <li>The item numbers listed on the filing. These items produce an entry on their own:
+      <ul>
+        <li>Item 1.01 (Entry into a Material Definitive Agreement): &ldquo;Material Definitive Agreement&rdquo;, strength 1 (stored only)</li>
+        <li>Item 1.03 (Bankruptcy or Receivership): &ldquo;Bankruptcy or Receivership&rdquo;, strength 4</li>
+        <li>Item 2.01 (Completion of Acquisition or Disposition of Assets): &ldquo;Completed Acquisition or Disposition&rdquo;, strength 3</li>
+        <li>Item 2.04 (Triggering Events That Accelerate or Increase a Direct Financial Obligation): &ldquo;Obligation Accelerated or Increased&rdquo;, strength 3</li>
+        <li>Item 3.01 (Notice of Delisting or Failure to Satisfy a Continued Listing Rule or Standard; Transfer of Listing): &ldquo;Delisting Notice or Listing Deficiency&rdquo;, strength 2</li>
+        <li>Item 5.01 (Changes in Control of Registrant): &ldquo;Change in Control&rdquo;, strength 4</li>
+        <li>Item 5.02 (Departure of Directors or Certain Officers; Election of Directors; Appointment of Certain Officers): &ldquo;Director or Officer Change&rdquo;, strength 1 (stored only)</li>
+      </ul>
+    </li>
+    <li>The text of the main 8-K document and of its EX-99 exhibits, which are usually press releases. Other exhibits, such as the full text of a merger agreement, are not read. FilingBell looks for wording that describes a signed merger agreement, a tender offer, a going-private proposal, a received acquisition proposal, a special committee, a strategic alternatives process or review, a financial advisor being engaged, a shareholder rights plan, or a merger agreement being terminated.</li>
+  </ul>
+  <p>The text rules are written to avoid common false matches:</p>
+  <ul>
+    <li>A statement that a review has concluded or ended, or that the company is no longer exploring alternatives, cancels the strategic-review entries from the same filing and is recorded as &ldquo;Strategic Review Concluded&rdquo; instead.</li>
+    <li>A statement that a review has concluded, or that a merger agreement was terminated, is not counted when it is conditional or hypothetical, such as what would happen &ldquo;if the merger agreement is terminated&rdquo;. The other text rules skip a match when the few words just before it negate it or make it conditional, as in &ldquo;the company is not exploring strategic alternatives&rdquo; or &ldquo;if the company were to explore strategic alternatives&rdquo;. This check reads only those few words, so some negated or hypothetical sentences can still produce an entry, and an actual announcement can occasionally be missed.</li>
+    <li>Boilerplate is skipped: forward-looking-statement legends, proxy solicitation legends and exhibit lists.</li>
+    <li>A merger agreement counts as newly signed only when the filing reports Item 1.01 or the agreement is dated within 10 days of the filing. A reference to an earlier agreement is recorded as &ldquo;Merger Agreement Update&rdquo;, and one dated more than 365 days before the filing is ignored.</li>
+    <li>When one filing matches several rules, the site shows the strongest.</li>
+  </ul>
+
+  <h3 id="form-4">Form 4</h3>
+  <p>Officers, directors and holders of more than 10% of a class of a company's registered equity securities report their transactions on Form 4. FilingBell counts only purchases reported with transaction code P (open-market or private purchases) at a price above zero. Awards, option exercises, gifts and sales, including planned sales, never produce an entry.</p>
+  <ul>
+    <li>A large purchase: one filing whose purchases total at least $500,000, or that total at least $50,000 and either raise the insider's holdings by at least 20% or are the insider's first reported holding of the security.</li>
+    <li>Purchases by three or more insiders: three or more different insiders bought shares of the same company within 30 days. Several people or entities filing one Form 4 jointly count as one insider.</li>
+    <li>Large and multi-insider purchases are recorded only when the Form 4 states a trading symbol. For companies without one, such as non-traded funds, purchases are stored at the lowest strength only.</li>
+    <li>An amended Form 4/A does not create a second entry for a purchase already reported.</li>
+  </ul>
+
+  <h3 id="schedule-13d-13g">Schedule 13D and 13G</h3>
+  <p>A person or group that acquires beneficial ownership of more than 5% of a class of a company's registered voting shares files Schedule 13D, or the shorter Schedule 13G if they qualify, for example as a passive investor. FilingBell reads the cover page data (shares and percentage of the class) and, for a 13D, Item 4, &ldquo;Purpose of Transaction&rdquo;.</p>
+  <ul>
+    <li>A new 13D whose Item 4 states actions or intentions for the company, such as nominating directors, a proxy contest, an acquisition proposal, a letter to the board or urging a change in strategy. General reservations of rights (&ldquo;may, from time to time&rdquo;) and statements of no present plans do not count.</li>
+    <li>Any other new 13D.</li>
+    <li>A 13D amendment is listed when the reported stake moved by at least 1 percentage point compared with the filer's previous 13D on the company, or when its Item 4 newly states plans for the company. Other amendments are stored only.</li>
+    <li>A new 13G is listed when it reports at least 10% of the class. 13G amendments are stored only.</li>
+    <li>When several reporting persons file together, the percentage shown is the largest any one of them reports, because their holdings usually overlap.</li>
+  </ul>
+
+  <h3 id="events">Tender offers, merger proxies, Form 10, Form 15 and Form 25</h3>
+  <p>These filings are classified by form type. Their text is not read, except that for Form 25 FilingBell reads which security is being removed from listing and under which rule. Forms covered: SC TO-T, SC14D1F, SC TO-I, SC13E4F, SC 14D9, SC14D9F, SC TO-C, SC14D9C, SC TO-T/A, SC TO-I/A, SC 14D9/A, SC14D1F/A, SC14D9F/A, SC13E4F/A, SC 13E3, SC 13E3/A, DEFM14A, DEFM14C, PREM14A, PREM14C, 10-12B, 10-12G, 10-12B/A, 10-12G/A, 15-12B, 15-12G, 15-15D, 25-NSE, 25.</p>
+  <ul>
+    <li>A third-party tender offer that has started ranks above a company's offer to buy back its own shares, and a definitive merger proxy above a preliminary one.</li>
+    <li>Amendments, and routine filings by investment companies (for example, the periodic repurchase offers of interval funds), are stored at the lowest strength.</li>
+  </ul>
+
+  <h3 id="form-13f">Form 13F</h3>
+  <p>Investment managers with at least $100 million in certain U.S.-listed securities report their long positions in those securities each quarter on Form 13F, up to 45 days after the quarter ends. FilingBell reads the 13F filings of a fixed list of 31 managers and compares each with the same manager's report for the previous quarter. Inclusion on the list is not an endorsement of a manager or a suggestion to follow its holdings, and none of these managers is affiliated with, or has endorsed, FilingBell. The list is chosen by FilingBell and can change. A 13F shows only part of a portfolio: no short positions, cash, most non-U.S. holdings or positions under confidential treatment.</p>
+  <ul>
+    <li>A new position: not reported the previous quarter, and worth at least $10,000,000 or at least 1% of the manager's reported portfolio.</li>
+    <li>An increase: the number of shares up at least 50%, with the same size test.</li>
+    <li>Decreases of at least 50% and positions no longer reported are stored only.</li>
+    <li>Likely stock splits and changed security identifiers are detected and do not produce entries; detection can miss some.</li>
+    <li>When the company in a 13F line could be matched only from a shortened name, the entry is not shown.</li>
+  </ul>
+  <p>The managers, by their EDGAR filer names:</p>
+  <ul class="name-list">
+    <li>ABRAMS CAPITAL MANAGEMENT, L.P.</li>
+    <li>AKRE CAPITAL MANAGEMENT LLC</li>
+    <li>Ancora Advisors LLC</li>
+    <li>Appaloosa LP</li>
+    <li>BAUPOST GROUP LLC/MA</li>
+    <li>BERKSHIRE HATHAWAY INC</li>
+    <li>Cevian Capital II GP LTD</li>
+    <li>Corvex Management LP</li>
+    <li>DME Capital Management, LP</li>
+    <li>Elliott Investment Management L.P.</li>
+    <li>Engaged Capital LLC</li>
+    <li>FAIRHOLME CAPITAL MANAGEMENT LLC</li>
+    <li>ICAHN CARL C</li>
+    <li>Irenic Capital Management LP</li>
+    <li>JANA Partners Management, LP</li>
+    <li>Land &amp; Buildings Investment Management, LLC</li>
+    <li>Legion Partners Asset Management, LLC</li>
+    <li>LONE PINE CAPITAL LLC</li>
+    <li>Mantle Ridge LP</li>
+    <li>OAKTREE CAPITAL MANAGEMENT LP</li>
+    <li>PERSHING SQUARE INC.</li>
+    <li>Politan Capital Management LP</li>
+    <li>Ruane, Cunniff &amp; Goldfarb L.P.</li>
+    <li>Sachem Head Capital Management LP</li>
+    <li>SOUTHEASTERN ASSET MANAGEMENT INC/TN/</li>
+    <li>Starboard Value LP</li>
+    <li>Third Point LLC</li>
+    <li>TIGER GLOBAL MANAGEMENT LLC</li>
+    <li>TRIAN FUND MANAGEMENT, L.P.</li>
+    <li>ValueAct Holdings, L.P.</li>
+    <li>VIKING GLOBAL INVESTORS LP</li>
+  </ul>
+
+  <h3 id="linked-filings">Linked filings</h3>
+  <p>A linked-filings entry is recorded when the same company has a filing from each required group of a rule, all filed within the rule's window, and the newest was filed within the last few days. The entry lists the filings that met the rule. The rules are fixed in a configuration file:</p>
+  <ul>
+    <li><strong>13D Stake, Purchases by 3+ Insiders and Strategic-Review 8-K Within 90 Days</strong> &mdash; window 90 days, newest filing within 7 days, strength 5. Requires:
+      <ul>
+        <li>at strength 3 or higher, one of: 13D Amendment; 13D Stake: Item 4 States Plans for the Company; New 13D Stake</li>
+        <li>one of: Purchases by 3+ Insiders Within 30 Days</li>
+        <li>one of: Acquisition Proposal Received; Engaged a Financial Advisor; Exploring Strategic Alternatives; Reviewing Strategic Alternatives; Special Committee Formed; Strategic Alternatives Process</li>
+      </ul>
+    </li>
+    <li><strong>13D Stake and Strategic-Review 8-K Within 90 Days</strong> &mdash; window 90 days, newest filing within 7 days, strength 5. Requires:
+      <ul>
+        <li>at strength 3 or higher, one of: 13D Amendment; 13D Stake: Item 4 States Plans for the Company; New 13D Stake</li>
+        <li>one of: Acquisition Proposal Received; Engaged a Financial Advisor; Exploring Strategic Alternatives; Reviewing Strategic Alternatives; Special Committee Formed; Strategic Alternatives Process</li>
+      </ul>
+    </li>
+    <li><strong>Insider Purchases and Strategic-Review 8-K Within 90 Days</strong> &mdash; window 90 days, newest filing within 7 days, strength 4. Requires:
+      <ul>
+        <li>one of: Large Insider Purchase Reported; Purchases by 3+ Insiders Within 30 Days</li>
+        <li>one of: Acquisition Proposal Received; Engaged a Financial Advisor; Exploring Strategic Alternatives; Reviewing Strategic Alternatives; Special Committee Formed; Strategic Alternatives Process</li>
+      </ul>
+    </li>
+    <li><strong>13D Stake and Purchases by 3+ Insiders Within 90 Days</strong> &mdash; window 90 days, newest filing within 7 days, strength 4. Requires:
+      <ul>
+        <li>at strength 3 or higher, one of: 13D Amendment; 13D Stake: Item 4 States Plans for the Company; New 13D Stake</li>
+        <li>one of: Purchases by 3+ Insiders Within 30 Days</li>
+      </ul>
+    </li>
+    <li><strong>13D Stake and Tracked Fund&#39;s 13F New or Larger Position Within 120 Days</strong> &mdash; window 120 days, newest filing within 7 days, strength 4. Requires:
+      <ul>
+        <li>at strength 3 or higher, one of: 13D Amendment; 13D Stake: Item 4 States Plans for the Company; New 13D Stake</li>
+        <li>one of: Manager Disclosed New Position; Manager Reported 50%+ More Shares</li>
+      </ul>
+    </li>
+  </ul>
+  <p>A 13D amendment counts only when it has been raised to strength 3, as described under Schedule 13D and 13G.</p>
+
+  <h2 id="strength">Strength (1 to 5)</h2>
+  <p>Strength (1 to 5) is FilingBell&#39;s rule-based ranking of how definitive or significant the reported event is under fixed criteria: for example, a signed merger agreement ranks above a board saying it is exploring options, and purchases by three or more insiders rank above a single purchase. It is not a rating of the company or its stock and not a prediction of price movement.</p>
+  <p>Strength is set by fixed rules for each type of entry, as listed in the tables below. In plain terms:</p>
+  <ul>
+    <li>Form 8-K: a signed merger agreement ranks highest, followed by tender offers, going-private proposals, bankruptcies and changes in control; a special committee, a strategic alternatives process or an engaged financial advisor ranks above a company saying it is exploring or reviewing options; routine items such as officer changes rank lowest.</li>
+    <li>Form 4: purchases by several insiders rank above one large purchase; other purchases rank lowest.</li>
+    <li>Schedule 13D and 13G: a new 13D whose Item 4 states plans for the company ranks highest, then other new 13Ds; new 13G stakes and amendments rank lower.</li>
+    <li>Tender offer, proxy and listing forms: a third-party tender offer that has started ranks highest; amendments and investment-company filings rank lowest.</li>
+    <li>Form 13F: a new position ranks above an increase; decreases and exits rank lowest.</li>
+    <li>Linked filings: the strength set for each rule above.</li>
+  </ul>
+  <h3 id="strength-form8k">Form 8-K</h3>
+  <table class="ref-table">
+    <caption>Form 8-K: every entry type, its category and strength.</caption>
+    <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Strength</th><th scope="col">Listed on the site</th></tr></thead>
+    <tbody>
+      <tr><td>Signed Merger Agreement</td><td>Merger Agreement</td><td class="num">5</td><td>Yes</td></tr>
+      <tr><td>Bankruptcy or Receivership</td><td>Distress</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Change in Control</td><td>Change in Control</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Going-Private Proposal</td><td>Going-Private Proposal</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Tender Offer for the Company&#39;s Shares</td><td>Tender Offer</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Acquisition Proposal Received</td><td>Strategic Review</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Completed Acquisition or Disposition</td><td>Completed Transaction</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Engaged a Financial Advisor</td><td>Strategic Review</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Merger Agreement Update</td><td>Deal Update</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Obligation Accelerated or Increased</td><td>Distress</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Special Committee Formed</td><td>Strategic Review</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Strategic Alternatives Process</td><td>Strategic Review</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Delisting Notice or Listing Deficiency</td><td>Listing Status</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Exploring Strategic Alternatives</td><td>Strategic Review</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Merger Agreement Terminated</td><td>Process Ended</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Reviewing Strategic Alternatives</td><td>Strategic Review</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Shareholder Rights Plan Adopted</td><td>Defensive Measure</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Director or Officer Change</td><td>Management Change</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Material Definitive Agreement</td><td>Agreement</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Strategic Review Concluded</td><td>Process Ended</td><td class="num">1</td><td>No, stored only</td></tr>
+    </tbody>
+  </table>
+  <h3 id="strength-form4">Form 4</h3>
+  <table class="ref-table">
+    <caption>Form 4: every entry type, its category and strength.</caption>
+    <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Strength</th><th scope="col">Listed on the site</th></tr></thead>
+    <tbody>
+      <tr><td>Purchases by 3+ Insiders Within 30 Days</td><td>Insider Purchase</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Large Insider Purchase Reported</td><td>Insider Purchase</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Insider Purchase Reported</td><td>Insider Purchase</td><td class="num">1</td><td>No, stored only</td></tr>
+    </tbody>
+  </table>
+  <h3 id="strength-sc13d">Schedule 13D and 13G</h3>
+  <table class="ref-table">
+    <caption>Schedule 13D and 13G: every entry type, its category and strength.</caption>
+    <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Strength</th><th scope="col">Listed on the site</th></tr></thead>
+    <tbody>
+      <tr><td>13D Stake: Item 4 States Plans for the Company</td><td>Ownership Stake</td><td class="num">5</td><td>Yes</td></tr>
+      <tr><td>New 13D Stake</td><td>Ownership Stake</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>New 13G Stake</td><td>13G Stake</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>13D Amendment</td><td>Ownership Stake</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>13G Amendment</td><td>13G Stake</td><td class="num">1</td><td>No, stored only</td></tr>
+    </tbody>
+  </table>
+  <p class="note">A 13D amendment is raised to strength 3, and listed, as “13D Amendment: Stake Changed” or “13D Amendment: New Item 4 Plans Stated” when the conditions described under Schedule 13D and 13G above are met.</p>
+  <p class="note">A new 13G below 10% of the class has the same label at strength 1 and is stored only.</p>
+  <h3 id="strength-events">Tender offers, merger proxies and listing forms</h3>
+  <table class="ref-table">
+    <caption>Tender offers, merger proxies and listing forms: every entry type, its category and strength.</caption>
+    <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Strength</th><th scope="col">Listed on the site</th></tr></thead>
+    <tbody>
+      <tr><td>Third-Party Tender Offer Launched</td><td>Tender Offer</td><td class="num">5</td><td>Yes</td></tr>
+      <tr><td>Board Response to Tender Offer (Schedule 14D-9)</td><td>Tender Offer</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Definitive Merger Proxy Filed</td><td>Merger Vote</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Exchange Registration on Form 10 (Often a Spin-Off)</td><td>Registration</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Going-Private Transaction Statement (13E-3)</td><td>Going-Private Transaction</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Deregistration of Listed Securities (Form 15)</td><td>Listing Status</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Exchange Delisting for Failure to Meet Listing Standards</td><td>Listing Status</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Issuer Tender Offer for Its Own Shares</td><td>Tender Offer</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Preliminary Merger Proxy Filed</td><td>Merger Vote</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Common Stock Removed from Exchange Listing (Form 25)</td><td>Listing Status</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Form 10 Registration Under Section 12(g)</td><td>Registration</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>SPAC Business-Combination Proxy Filed</td><td>Merger Vote</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Tender Offer Pre-Commencement Communication</td><td>Tender Offer</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Debt, Preferred, Warrant or Fund Shares Removed from Listing (Form 25)</td><td>Listing Status</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Deregistration Under Section 12(g) (Form 15)</td><td>Listing Status</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Form 10 Registration Amended</td><td>Registration</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Going-Private Statement Amended (13E-3/A)</td><td>Deal Update</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Investment Company Tender Offer, Merger or Registration Filing</td><td>Investment Company</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Preliminary SPAC Business-Combination Proxy</td><td>Merger Vote</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Suspension of Reporting Obligations (Form 15-15D)</td><td>Listing Status</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Tender Offer Filing Amended</td><td>Tender Offer</td><td class="num">1</td><td>No, stored only</td></tr>
+    </tbody>
+  </table>
+  <h3 id="strength-form13f">Form 13F</h3>
+  <table class="ref-table">
+    <caption>Form 13F: every entry type, its category and strength.</caption>
+    <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Strength</th><th scope="col">Listed on the site</th></tr></thead>
+    <tbody>
+      <tr><td>Manager Disclosed New Position</td><td>Manager Holdings (13F)</td><td class="num">3</td><td>Yes</td></tr>
+      <tr><td>Manager Reported 50%+ More Shares</td><td>Manager Holdings (13F)</td><td class="num">2</td><td>Yes</td></tr>
+      <tr><td>Manager Reported 50%+ Fewer Shares</td><td>Manager Holdings (13F)</td><td class="num">1</td><td>No, stored only</td></tr>
+      <tr><td>Position No Longer in Manager&#39;s 13F</td><td>Manager Holdings (13F)</td><td class="num">1</td><td>No, stored only</td></tr>
+    </tbody>
+  </table>
+  <h3 id="strength-crosslink">Linked filings</h3>
+  <table class="ref-table">
+    <caption>Linked filings: every entry type, its category and strength.</caption>
+    <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Strength</th><th scope="col">Listed on the site</th></tr></thead>
+    <tbody>
+      <tr><td>13D Stake and Strategic-Review 8-K Within 90 Days</td><td>Linked Filings</td><td class="num">5</td><td>Yes</td></tr>
+      <tr><td>13D Stake, Purchases by 3+ Insiders and Strategic-Review 8-K Within 90 Days</td><td>Linked Filings</td><td class="num">5</td><td>Yes</td></tr>
+      <tr><td>13D Stake and Purchases by 3+ Insiders Within 90 Days</td><td>Linked Filings</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>13D Stake and Tracked Fund&#39;s 13F New or Larger Position Within 120 Days</td><td>Linked Filings</td><td class="num">4</td><td>Yes</td></tr>
+      <tr><td>Insider Purchases and Strategic-Review 8-K Within 90 Days</td><td>Linked Filings</td><td class="num">4</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="what-is-shown">What the site shows</h2>
+  <p>The site and the planned daily digest list entries at strength 2 or higher. Entries below that are stored and can count toward linked-filings rules, but are not listed. The feed, section and daily pages cover the last 90 days; ticker pages list every stored entry for the company at strength 2 or higher. When one filing produces several entries for the same company, the site shows the strongest, and lists linked-filings entries separately.</p>
+
+  <h2 id="tickers">Tickers</h2>
+  <p>Tickers come from the SEC's company ticker files, which map each company's CIK (its SEC identifier) to its listed symbols, and, for Form 4, from the trading symbol stated in the filing. Where a company has several listed securities, such as warrants, units or preferred shares, the common stock is chosen, and a major exchange is preferred over over-the-counter quotation. A ticker can be missing, or out of date if the symbol changed; filings without a ticker are listed by CIK.</p>
+
+  <h2 id="limitations">Limitations</h2>
+  <ul>
+    <li>Automated parsing can misread a filing: a phrase can match in the wrong context, unusual wording can be missed, and figures on a cover page can be misreported or misparsed. Always read the filing itself.</li>
+    <li>Filings can be made late, and filers amend them; an amendment can change what an earlier entry describes.</li>
+    <li>If EDGAR is unavailable, or runs fail for longer than the catch-up window above, filings from the missed days can be missed.</li>
+    <li>13F positions are as of the end of a quarter and are filed up to 45 days later, so they can be several months old.</li>
+    <li>FilingBell uses no price or market data and shows none.</li>
+    <li>There is no performance or outcome data. The earlier backtest was withdrawn (see the <a href="../track-record/index.html">track record</a> page), and no entry says anything about what a company's stock did or will do afterward.</li>
+  </ul>
+
+  <h2 id="corrections">Corrections</h2>
+  <p>Spot an error? Use the <a href="../index.html#feedback">suggestion form on the home page</a>.</p>
+</article>
+</main>
+
+<footer class="wrap">
+  <h2>Join the waitlist for the daily digest.</h2>
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="footer-email" class="visually-hidden">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
+    <input type="email" id="footer-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <button class="cta" type="submit">Join the waitlist</button>
+  </form>
+  <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
+  <nav class="footer-nav" aria-label="About FilingBell">
+    <ul>
+      <li><a href="../methodology/index.html" aria-current="page">Methodology</a></li>
+      <li><a href="../track-record/index.html">Track record</a></li>
+    </ul>
+  </nav>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision. Data is drawn from SEC EDGAR and may be delayed, incomplete or contain parsing errors. FilingBell is not affiliated with or endorsed by the SEC.</div>
+</footer>
+
+</body>
+</html>

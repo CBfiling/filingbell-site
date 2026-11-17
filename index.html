@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FilingBell — Know When a Company Files Something Big</title>
+<meta name="description" content="A daily digest of SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Every entry links to the primary filing. Join the waitlist for the email digest.">
+<link rel="canonical" href="https://cbfiling.github.io/filingbell-site/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/png" href="favicon.png?v=30dc208ea3">
+
+<meta property="og:site_name" content="FilingBell">
+<meta property="og:title" content="FilingBell — Know When a Company Files Something Big">
+<meta property="og:description" content="A daily digest of SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Join the waitlist.">
+<meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbfiling.github.io/filingbell-site/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FilingBell — Know When a Company Files Something Big">
+<meta name="twitter:description" content="A daily digest of SEC 8-K filings signaling special situations — strategic reviews, special committees, mergers, and bankruptcies. Join the waitlist.">
+<meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=ae4f66d09b">
+<script>try{var t=localStorage.getItem('fb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script src="theme.js?v=34ea638ee7" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://cbfiling.github.io/filingbell-site/#website","name":"FilingBell","url":"https://cbfiling.github.io/filingbell-site/","description":"FilingBell lists SEC EDGAR filings that report corporate events such as merger agreements, strategic reviews, insider purchases and 5% ownership stakes, each linked to the filing.","inLanguage":"en","publisher":{"@id":"https://cbfiling.github.io/filingbell-site/#organization"}},{"@type":"Organization","@id":"https://cbfiling.github.io/filingbell-site/#organization","name":"FilingBell","url":"https://cbfiling.github.io/filingbell-site/","logo":"https://cbfiling.github.io/filingbell-site/profile_picture.png"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"The digest isn't open yet \u2014 right now there's a waitlist. It will be free during early access, with no paid tier and no credit card. If that changes later, subscribers will hear about it first \u2014 nothing gets charged without asking."}},{"@type":"Question","name":"What do you do with my email?","acceptedAnswer":{"@type":"Answer","text":"For now it's used only to tell you when the daily digest opens, and nothing else. It isn't sold or shared for marketing. It's collected by Formspree, the service that runs the waitlist form, which stores it and forwards each signup to my email inbox. When the digest opens, your address will be moved to an email delivery service, and you'll be asked to confirm before receiving the digest \u2014 if you don't confirm, you won't get it. Every digest will include an unsubscribe link. To be removed from the waitlist before then, send a note through the suggestion form below and include the email address you signed up with."}},{"@type":"Question","name":"Is this investment advice?","acceptedAnswer":{"@type":"Answer","text":"No. FilingBell surfaces public SEC filings and points you to the primary source. It never tells you to buy or sell anything \u2014 you read the actual filing and decide for yourself."}},{"@type":"Question","name":"How is this different from a stock screener?","acceptedAnswer":{"@type":"Answer","text":"Standard screeners filter on numbers (P/E, market cap, ROE). They have no concept of \"this company just told the SEC it's exploring a sale,\" because that lives in unstructured filing text, not a data field. FilingBell reads that text."}},{"@type":"Question","name":"Where did the backtest numbers go?","acceptedAnswer":{"@type":"Answer","text":"They were withdrawn after an audit found that the outcome classification counted many companies as \u201cacquired\u201d that were still independently listed. Rather than leave inaccurate figures up, they've been removed while a corrected, clearly hypothetical backtest is built. Details are on the track record page."}}]}</script>
+</head>
+<body>
+
+<nav class="wrap" aria-label="Main">
+  <a class="logo" href="index.html">Filing<b>Bell</b></a>
+  <div class="nav-right">
+    <div class="nav-links">SEC EDGAR &middot; 8-K, Form 4, 13D/G, 13F &middot; Daily</div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" hidden><span aria-hidden="true">&#9680;</span><span class="visually-hidden">Dark theme</span></button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="feed/index.html">Feed</a></li>
+    <li><a href="special-situations/index.html">Special situations</a></li>
+    <li><a href="insiders/index.html">Insiders</a></li>
+    <li><a href="institutions/index.html">Institutions</a></li>
+    <li><a href="daily/index.html">Daily</a></li>
+  </ul>
+</nav>
+
+<main>
+<header class="hero wrap">
+  <div class="stamp" aria-hidden="true">
+    <div class="stamp-inner">NEW<span class="big">8-K</span>TODAY</div>
+  </div>
+  <div class="eyebrow">Scanning EDGAR every day</div>
+  <h1>Know the day a company puts itself in play.</h1>
+  <p class="hero-sub">Every day, public companies quietly tell the SEC they're <em>exploring a sale, forming a special committee, or filing for bankruptcy</em> &mdash; buried in 8-Ks nobody reads until it's news. FilingBell reads all of them, the day they're filed.</p>
+
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="email" class="visually-hidden">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
+    <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <button class="cta" type="submit">Join the waitlist</button>
+  </form>
+  <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
+</header>
+
+<section class="wrap">
+  <div class="section-label">Sample Digest</div>
+  <h2>This is what the daily digest will look like.</h2>
+  <p class="lead">Real filings, ranked by how confirmed the event actually is &mdash; a signed merger agreement first, a board "exploring options" further down.</p>
+
+  <div class="digest-frame">
+    <table>
+      <caption>Illustrative entries from past filings. Not a recommendation to buy or sell any security.</caption>
+      <thead>
+        <tr><th scope="col">Company</th><th scope="col">Signal</th><th scope="col">Filed</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Company"><div class="company">Lulu's Fashion Lounge</div><div class="ticker">LVLU</div></td>
+          <td data-label="Signal"><span class="badge badge-amber">Special Committee Formed</span></td>
+          <td data-label="Filed">Jul 13</td>
+        </tr>
+        <tr>
+          <td data-label="Company"><div class="company">Aterian, Inc.</div><div class="ticker">ATER</div></td>
+          <td data-label="Signal"><span class="badge badge-amber">Strategic Alternatives Process</span></td>
+          <td data-label="Filed">Mar 23</td>
+        </tr>
+        <tr>
+          <td data-label="Company"><div class="company">Domo, Inc.</div><div class="ticker">DOMO</div></td>
+          <td data-label="Signal"><span class="badge badge-slate">Exploring Strategic Alternatives</span></td>
+          <td data-label="Filed">Feb 19</td>
+        </tr>
+        <tr>
+          <td data-label="Company"><div class="company">LKQ Corp</div><div class="ticker">LKQ</div></td>
+          <td data-label="Signal"><span class="badge badge-slate">Reviewing Strategic Alternatives</span></td>
+          <td data-label="Filed">Jan 26</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">How it works</div>
+  <h2>Three steps, none of them yours.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div><h3>We read every 8-K, daily</h3><p>Every new filing on EDGAR is scanned for the exact language companies use when something structural is happening &mdash; strategic reviews, special committees, mergers, bankruptcies.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div><h3>We rank by certainty</h3><p>A signed merger agreement isn't the same as a board "considering its options." We sort by how confirmed the event actually is, not just how recent.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div><h3>It will land in your inbox</h3><p>Once the digest opens, one email each morning. Every entry links straight to the primary filing on EDGAR &mdash; we point, you decide.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Who it's for</div>
+  <h2>Built for people who act on primary sources.</h2>
+  <p class="lead">It's built for a few specific kinds of reader:</p>
+  <div class="audience-grid">
+    <div class="audience-card"><span class="tag">Value &amp; distressed</span><p>Watching for companies trading below tangible book that have disclosed a strategic review or sale process.</p></div>
+    <div class="audience-card"><span class="tag">Merger arbitrage</span><p>Tracking the spread between today's price and an announced deal price.</p></div>
+    <div class="audience-card"><span class="tag">Credit &amp; distressed debt</span><p>Bankruptcy and restructuring filings matter to bondholders as much as shareholders.</p></div>
+    <div class="audience-card"><span class="tag">Corp dev &amp; deal sourcing</span><p>Daily awareness of which public companies are formally exploring a sale.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Track record</div>
+  <h2>Being rebuilt.</h2>
+  <div class="track-record-box">
+    <div class="big-label">Backtest withdrawn for revision</div>
+    <p>An audit found a flaw in how the earlier backtest classified outcomes, so those figures have been taken down. A corrected backtest &mdash; clearly labeled as hypothetical, including losers and delisted companies, and compared against a market benchmark &mdash; is planned and will be published here with its full methodology when complete.</p>
+    <a href="track-record/index.html" class="cta">Read what changed &rarr;</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Why I built this</div>
+  <h2>One person's research tool, not a company.</h2>
+  <p class="lead">
+    I spend a lot of time digging through SEC filings by hand &mdash; looking for the kind of mispriced, overlooked situations that don't show up on a normal stock screener. A board quietly hiring a bank to "explore alternatives," a special committee getting formed, a company trading at a steep discount to book value right as something changes.
+  </p>
+  <p class="lead">
+    The problem is that information is buried in individual 8-K filings, not a searchable database, and by the time it shows up in a headline or a stock screener, it's often old news. I got tired of manually checking EDGAR every day, so I built a scraper that does it for me. Measuring what happens after these filings is ongoing work &mdash; the first backtest had a flaw and has been withdrawn while a corrected version is built.
+  </p>
+  <p class="lead last">
+    This is a solo project, still early. I use it myself every morning, and I'm sharing it because I figured other people doing similar research might find it useful too.
+  </p>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Questions</div>
+  <h2>The obvious questions, answered.</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">Is it really free?</div>
+      <div class="faq-a">The digest isn't open yet &mdash; right now there's a waitlist. It will be free during early access, with no paid tier and no credit card. If that changes later, subscribers will hear about it first &mdash; nothing gets charged without asking.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What do you do with my email?</div>
+      <div class="faq-a">For now it's used only to tell you when the daily digest opens, and nothing else. It isn't sold or shared for marketing. It's collected by Formspree, the service that runs the waitlist form, which stores it and forwards each signup to my email inbox. When the digest opens, your address will be moved to an email delivery service, and you'll be asked to confirm before receiving the digest &mdash; if you don't confirm, you won't get it. Every digest will include an unsubscribe link. To be removed from the waitlist before then, send a note through the suggestion form below and include the email address you signed up with.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is this investment advice?</div>
+      <div class="faq-a">No. FilingBell surfaces public SEC filings and points you to the primary source. It never tells you to buy or sell anything &mdash; you read the actual filing and decide for yourself.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is this different from a stock screener?</div>
+      <div class="faq-a">Standard screeners filter on numbers (P/E, market cap, ROE). They have no concept of "this company just told the SEC it's exploring a sale," because that lives in unstructured filing text, not a data field. FilingBell reads that text.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Where did the backtest numbers go?</div>
+      <div class="faq-a">They were withdrawn after an audit found that the outcome classification counted many companies as &ldquo;acquired&rdquo; that were still independently listed. Rather than leave inaccurate figures up, they've been removed while a corrected, clearly hypothetical backtest is built. Details are on the <a href="track-record/index.html" class="text-link">track record page</a>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="feedback">
+  <div class="section-label">Feedback</div>
+  <h2>Spot something off? Tell me.</h2>
+  <p class="lead">This is an early, one-person project and I'm genuinely trying to make it better. Trigger phrases worth adding, outcomes that look wrong, features you'd want &mdash; it all helps. Goes straight to my inbox.</p>
+  <form class="suggestion-form" action="https://formspree.io/f/mlgqodop" method="POST">
+    <input type="hidden" name="_subject" value="FilingBell suggestion">
+    <label for="suggestion" class="visually-hidden">Your suggestion</label>
+    <textarea id="suggestion" name="suggestion" rows="4" placeholder="What should I fix, change, or add?" required></textarea>
+    <div class="suggestion-row">
+      <label for="reply_email" class="visually-hidden">Your email (optional)</label>
+      <input type="email" id="reply_email" name="email" placeholder="your email (optional, if you'd like a reply)" autocomplete="email">
+      <button class="cta" type="submit">Send suggestion</button>
+    </div>
+  </form>
+</section>
+</main>
+
+<footer class="wrap">
+  <h2>Be first to know when the digest opens.</h2>
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="footer-email" class="visually-hidden">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
+    <input type="email" id="footer-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <button class="cta" type="submit">Join the waitlist</button>
+  </form>
+  <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
+  <nav class="footer-nav" aria-label="About FilingBell">
+    <ul>
+      <li><a href="methodology/index.html">Methodology</a></li>
+      <li><a href="track-record/index.html">Track record</a></li>
+    </ul>
+  </nav>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision. Data is drawn from SEC EDGAR and may be delayed, incomplete or contain parsing errors. FilingBell is not affiliated with or endorsed by the SEC.</div>
+</footer>
+
+</body>
+</html>
