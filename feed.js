@@ -1,7 +1,8 @@
 /* Feed filters (progressive enhancement). Without JS the server-rendered table is
    the feed and the filter form stays hidden. With JS: filter the rendered rows; if the
    build capped the table, load feed.json and render every row first. Text from the
-   JSON is set with textContent only; links are limited to sec.gov and ticker pages. */
+   JSON is set with textContent only; links are limited to sec.gov, ticker pages and
+   TradingView chart links (links only: FilingBell uses no TradingView data). */
 (function () {
   var form = document.getElementById('feed-filters');
   var body = document.getElementById('feed-rows');
@@ -43,6 +44,14 @@
     if (r.t && /^t\/[A-Z0-9][A-Z0-9.-]*\/index\.html$/.test(r.p || '')) {
       var a = add(tk, 'a', null, r.t);
       a.href = root + r.p;
+      if (/^https:\/\/www\.tradingview\.com\/chart\/\?symbol=(?:[A-Z]+:)?[A-Z0-9.]+$/.test(r.v || '')) {
+        tk.appendChild(document.createTextNode(' \u00b7 '));
+        var v = add(tk, 'a', 'chart-link', 'Chart');
+        v.href = r.v;
+        v.rel = 'noopener nofollow';
+        v.target = '_blank';
+        add(v, 'span', 'visually-hidden', ': ' + r.t + ' on TradingView');
+      }
     } else {
       tk.textContent = r.t || '';
     }

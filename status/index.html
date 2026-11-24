@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Status — FilingBell</title>
+<meta name="description" content="When FilingBell last ran, whether the daily alerts went out, and how recent its SEC filing data is.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://cbfiling.github.io/filingbell-site/status/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/png" href="../favicon.png?v=30dc208ea3">
+
+<meta property="og:site_name" content="FilingBell">
+<meta property="og:title" content="Status — FilingBell">
+<meta property="og:description" content="FilingBell pipeline status.">
+<meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbfiling.github.io/filingbell-site/status/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Status — FilingBell">
+<meta name="twitter:description" content="FilingBell pipeline status.">
+<meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css?v=e487b1b8d6">
+<script>try{var t=localStorage.getItem('fb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script src="../theme.js?v=34ea638ee7" defer></script>
+</head>
+<body>
+
+<nav class="wrap" aria-label="Main">
+  <a class="logo" href="../index.html">Filing<b>Bell</b></a>
+  <div class="nav-right">
+    <div class="nav-links">SEC EDGAR &middot; 8-K, Form 4, 13D/G, 13F &middot; Daily</div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" hidden><span aria-hidden="true">&#9680;</span><span class="visually-hidden">Dark theme</span></button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="../feed/index.html">Feed</a></li>
+    <li><a href="../special-situations/index.html">Special situations</a></li>
+    <li><a href="../insiders/index.html">Insiders</a></li>
+    <li><a href="../institutions/index.html">Institutions</a></li>
+    <li><a href="../daily/index.html">Daily</a></li>
+  </ul>
+</nav>
+
+<main>
+<article class="page-head wrap prose">
+  <div class="section-label">Status</div>
+  <h1 class="page-title">Pipeline status</h1>
+  <p class="lead">When FilingBell last ran and how recent its SEC data is. This page is rebuilt after every daily run.</p>
+
+  <ul>
+    <li>Newest filing date processed: <strong>2026-11-23</strong></li>
+    <li>Newest SEC acceptance time stored: <strong>Nov 23, 2026, 9:56 PM ET</strong></li>
+    <li>Database size: 16.3 MB</li>
+  </ul>
+
+  <h2 id="runs">Recent daily runs</h2>
+  <div class="data-frame">
+    <table class="data-table">
+      <caption>Last 8 daily runs, newest first</caption>
+      <thead><tr><th scope="col">Day</th><th scope="col">Started</th><th scope="col">Result</th><th scope="col">Alerts</th><th scope="col">Minutes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-label="Day">2026-11-24</td>
+          <td data-label="Started">Nov 24, 2026, 3:40 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">74</td>
+          <td data-label="Minutes">2.9</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-23</td>
+          <td data-label="Started">Nov 23, 2026, 5:02 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">0</td>
+          <td data-label="Minutes">0.1</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-22</td>
+          <td data-label="Started">Nov 22, 2026, 12:49 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">0</td>
+          <td data-label="Minutes">0.0</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-21</td>
+          <td data-label="Started">Nov 21, 2026, 12:29 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">72</td>
+          <td data-label="Minutes">3.7</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-20</td>
+          <td data-label="Started">Nov 20, 2026, 1:37 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">44</td>
+          <td data-label="Minutes">2.9</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-19</td>
+          <td data-label="Started">Nov 19, 2026, 1:59 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">53</td>
+          <td data-label="Minutes">2.8</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-18</td>
+          <td data-label="Started">Nov 18, 2026, 1:51 PM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">62</td>
+          <td data-label="Minutes">3.7</td>
+        </tr>
+        <tr>
+          <td data-label="Day">2026-11-17</td>
+          <td data-label="Started">Nov 17, 2026, 8:04 AM ET</td>
+          <td data-label="Result">Sent</td>
+          <td data-label="Alerts">227</td>
+          <td data-label="Minutes">8.4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">Each run processes the filings EDGAR listed for the previous business day. See the <a href="../methodology/index.html">methodology</a> for the schedule.</p>
+</article>
+</main>
+
+<footer class="wrap">
+  <h2>Join the waitlist for the daily digest.</h2>
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="footer-email" class="visually-hidden">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
+    <input type="email" id="footer-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <button class="cta" type="submit">Join the waitlist</button>
+  </form>
+  <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
+  <nav class="footer-nav" aria-label="About FilingBell">
+    <ul>
+      <li><a href="../methodology/index.html">Methodology</a></li>
+      <li><a href="../track-record/index.html">Track record</a></li>
+      <li><a href="../ledger/index.html">Alert ledger</a></li>
+      <li><a href="../status/index.html" aria-current="page">Status</a></li>
+    </ul>
+  </nav>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision. Data is drawn from SEC EDGAR and may be delayed, incomplete or contain parsing errors. FilingBell is not affiliated with or endorsed by the SEC.</div>
+</footer>
+
+</body>
+</html>

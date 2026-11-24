@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alert ledger — FilingBell</title>
+<meta name="description" content="A public, hash-chained record of every alert FilingBell sends, with the SEC acceptance time of each filing and the time the alert went out.">
+<link rel="canonical" href="https://cbfiling.github.io/filingbell-site/ledger/">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14213D">
+<link rel="icon" type="image/png" href="../favicon.png?v=30dc208ea3">
+
+<meta property="og:site_name" content="FilingBell">
+<meta property="og:title" content="Alert ledger — FilingBell">
+<meta property="og:description" content="Every FilingBell alert, timestamped and hash-chained.">
+<meta property="og:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbfiling.github.io/filingbell-site/ledger/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alert ledger — FilingBell">
+<meta name="twitter:description" content="Every FilingBell alert, timestamped and hash-chained.">
+<meta name="twitter:image" content="https://cbfiling.github.io/filingbell-site/profile_picture.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site.css?v=e487b1b8d6">
+<script>try{var t=localStorage.getItem('fb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script src="../theme.js?v=34ea638ee7" defer></script>
+</head>
+<body>
+
+<nav class="wrap" aria-label="Main">
+  <a class="logo" href="../index.html">Filing<b>Bell</b></a>
+  <div class="nav-right">
+    <div class="nav-links">SEC EDGAR &middot; 8-K, Form 4, 13D/G, 13F &middot; Daily</div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" hidden><span aria-hidden="true">&#9680;</span><span class="visually-hidden">Dark theme</span></button>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="../feed/index.html">Feed</a></li>
+    <li><a href="../special-situations/index.html">Special situations</a></li>
+    <li><a href="../insiders/index.html">Insiders</a></li>
+    <li><a href="../institutions/index.html">Institutions</a></li>
+    <li><a href="../daily/index.html">Daily</a></li>
+  </ul>
+</nav>
+
+<main>
+<article class="page-head wrap prose">
+  <div class="section-label">Proof</div>
+  <h1 class="page-title">Alert ledger</h1>
+  <p class="lead">A public record of every alert FilingBell sends, published so that past alerts can't be quietly edited, removed or back-dated.</p>
+
+  <h2 id="how">How it works</h2>
+  <p>Each time the daily alerts go out, FilingBell writes one ledger record. It lists every alert sent in that batch, with nothing left out, and for each one gives:</p>
+  <ul>
+    <li>the SEC accession number, form type and filing date, with a link to the filing on EDGAR;</li>
+    <li><strong>accepted_at</strong>: when the SEC accepted the filing, which is when it became public;</li>
+    <li><strong>first_seen_at</strong>: when FilingBell first downloaded it;</li>
+    <li><strong>sent_at</strong>: when the alert went out;</li>
+    <li>the label and strength FilingBell gave it.</li>
+  </ul>
+  <p>The record is saved as compact JSON and fingerprinted with SHA-256. Each record also contains the fingerprint of the record before it, so the records form a chain: changing anything in an old record changes its fingerprint, which no longer matches the next record, and so on to the end. Days with no alerts get a record too, so gaps are visible.</p>
+  <p>Every record is published below exactly as it was hashed, and this site's source repository on GitHub keeps the history of when each file first appeared.</p>
+
+  <h2 id="verify">Check it yourself</h2>
+  <ol>
+    <li>Download a record, for example <code>ledger/1.json</code>, and compute its SHA-256 (on macOS or Linux: <code>shasum -a 256 FILE</code>; on Windows: <code>certutil -hashfile FILE SHA256</code>). It must equal the fingerprint listed for it.</li>
+    <li>Open the record: its <code>prev_sha256</code> must equal the fingerprint of the record before it.</li>
+    <li>Or check the whole chain at once with <code>scripts/verify_ledger.py</code>, which reads <a href="../ledger/index.json"><code>ledger/index.json</code></a> and every record.</li>
+  </ol>
+
+  <h2 id="records">Records</h2>
+  <p>1 record since 2026-11-24, covering 74 alerts.</p>
+  <div class="data-frame">
+    <table class="data-table">
+      <caption>Ledger records, newest first</caption>
+      <thead><tr><th scope="col">#</th><th scope="col">Day</th><th scope="col">Alerts</th><th scope="col">SHA-256</th><th scope="col">Record</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-label="#">1</td>
+          <td data-label="Day"><time datetime="2026-11-24">2026-11-24</time></td>
+          <td data-label="Alerts">74</td>
+          <td data-label="SHA-256"><code class="hash">bdcea205354cf97761be06966b2320645edf8e8d8c536fb19e9160db6fcf8c37</code></td>
+          <td data-label="Record"><a class="edgar" href="../ledger/1.json">ledger/1.json</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="muted">Field list for each alert: accession_no, signal_type, cik, company, ticker, form_type, filed_date, accepted_at, first_seen_at, sent_at, strength, label, url. Times are UTC, in ISO 8601.</p>
+
+  <div class="disclaimer">
+    FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision.
+  </div>
+</article>
+</main>
+
+<footer class="wrap">
+  <h2>Join the waitlist for the daily digest.</h2>
+  <form class="signup" action="https://formspree.io/f/mbdnkwqj" method="POST">
+    <label for="footer-email" class="visually-hidden">Email address</label>
+    <input type="hidden" name="_subject" value="New FilingBell waitlist signup">
+    <input type="email" id="footer-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <button class="cta" type="submit">Join the waitlist</button>
+  </form>
+  <div class="form-note">Join the waitlist &mdash; we'll email you when the daily digest opens.</div>
+  <nav class="footer-nav" aria-label="About FilingBell">
+    <ul>
+      <li><a href="../methodology/index.html">Methodology</a></li>
+      <li><a href="../track-record/index.html">Track record</a></li>
+      <li><a href="../ledger/index.html" aria-current="page">Alert ledger</a></li>
+      <li><a href="../status/index.html">Status</a></li>
+    </ul>
+  </nav>
+  <div class="disclaimer">FilingBell surfaces public SEC filings for informational purposes only. It is not investment advice and does not recommend buying or selling any security. Always read the primary filing before making a decision. Data is drawn from SEC EDGAR and may be delayed, incomplete or contain parsing errors. FilingBell is not affiliated with or endorsed by the SEC.</div>
+</footer>
+
+</body>
+</html>
