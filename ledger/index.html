@@ -65,18 +65,25 @@
 
   <h2 id="verify">Check it yourself</h2>
   <ol>
-    <li>Download a record, for example <code>ledger/1.json</code>, and compute its SHA-256 (on macOS or Linux: <code>shasum -a 256 FILE</code>; on Windows: <code>certutil -hashfile FILE SHA256</code>). It must equal the fingerprint listed for it.</li>
+    <li>Download a record, for example <code>ledger/2.json</code>, and compute its SHA-256 (on macOS or Linux: <code>shasum -a 256 FILE</code>; on Windows: <code>certutil -hashfile FILE SHA256</code>). It must equal the fingerprint listed for it.</li>
     <li>Open the record: its <code>prev_sha256</code> must equal the fingerprint of the record before it.</li>
     <li>Or check the whole chain at once with <code>scripts/verify_ledger.py</code>, which reads <a href="../ledger/index.json"><code>ledger/index.json</code></a> and every record.</li>
   </ol>
 
   <h2 id="records">Records</h2>
-  <p>1 record since 2026-11-24, covering 74 alerts.</p>
+  <p>2 records since 2026-11-24, covering 134 alerts.</p>
   <div class="data-frame">
     <table class="data-table">
       <caption>Ledger records, newest first</caption>
       <thead><tr><th scope="col">#</th><th scope="col">Day</th><th scope="col">Alerts</th><th scope="col">SHA-256</th><th scope="col">Record</th></tr></thead>
       <tbody>
+        <tr>
+          <td data-label="#">2</td>
+          <td data-label="Day"><time datetime="2026-11-25">2026-11-25</time></td>
+          <td data-label="Alerts">60</td>
+          <td data-label="SHA-256"><code class="hash">983ab0169476a85fc4b5a461026bcdc55a65a85fe58a085d0d657a50cc5f2abe</code></td>
+          <td data-label="Record"><a class="edgar" href="../ledger/2.json">ledger/2.json</a></td>
+        </tr>
         <tr>
           <td data-label="#">1</td>
           <td data-label="Day"><time datetime="2026-11-24">2026-11-24</time></td>
